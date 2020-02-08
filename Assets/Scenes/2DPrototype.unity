@@ -164,6 +164,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!4 &133504678 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6296394958946335639, guid: 2ce6b5ebdd306884fb4585f0f1e6a362,
+    type: 3}
+  m_PrefabInstance: {fileID: 6296394958894753077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,12 +256,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 133504678}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &547627955
 GameObject:
@@ -336,7 +342,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5842357656246212224
 PrefabInstance:
@@ -388,7 +394,7 @@ PrefabInstance:
     - target: {fileID: 5842357657808301271, guid: f822470db59d304409dd0bf61aa17fe4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5842357657808301271, guid: f822470db59d304409dd0bf61aa17fe4,
         type: 3}
@@ -417,12 +423,17 @@ PrefabInstance:
     - target: {fileID: 4291197501300250784, guid: 2ce6b5ebdd306884fb4585f0f1e6a362,
         type: 3}
       propertyPath: DragMultiplier
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4291197501300250784, guid: 2ce6b5ebdd306884fb4585f0f1e6a362,
         type: 3}
       propertyPath: Speed
-      value: 100
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291197501300250784, guid: 2ce6b5ebdd306884fb4585f0f1e6a362,
+        type: 3}
+      propertyPath: Acceleration
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6296394958925787089, guid: 2ce6b5ebdd306884fb4585f0f1e6a362,
         type: 3}
@@ -472,7 +483,7 @@ PrefabInstance:
     - target: {fileID: 6296394958946335639, guid: 2ce6b5ebdd306884fb4585f0f1e6a362,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6296394958946335639, guid: 2ce6b5ebdd306884fb4585f0f1e6a362,
         type: 3}
