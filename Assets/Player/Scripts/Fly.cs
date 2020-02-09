@@ -56,6 +56,7 @@ namespace WaterKat.Player
             Move_X_Input = CurrentPlayer.InputActionMap.Gameplay.Move_X;
             Move_Y_Input = CurrentPlayer.InputActionMap.Gameplay.Move_Y;
             Move_Z_Input = CurrentPlayer.InputActionMap.Gameplay.Move_Z;
+            CurrentPlayer.InputActionMap.Gameplay.Boost.started += ctx => ToggleBoost();
         }
         void Start()
         {
@@ -64,6 +65,12 @@ namespace WaterKat.Player
             DragMultiplier = (-2 * Acceleration) / Mathf.Pow(MaxVelocity, 2);
             BoostVelocityMultiplier = Mathf.Pow(DesiredVelocityMultiplier, 2);
         }
+
+        void ToggleBoost()
+        {
+            Boosting = !Boosting;
+        }
+
         private void Update()
         {
             if (CurrentCameraController.CameraTransitioning)

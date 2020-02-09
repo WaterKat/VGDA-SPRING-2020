@@ -382,10 +382,21 @@
                 {
                     "name": "",
                     "id": "7bbeed7c-1caf-4dbb-ace2-149ec010fa75",
-                    "path": "",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
+                    "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be1869c3-8fb8-4739-801b-ebff317340ef",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard_Mouse",
                     "action": "Boost",
                     "isComposite": false,
                     "isPartOfComposite": false
