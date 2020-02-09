@@ -22,9 +22,12 @@ namespace WaterKat.Player
 
         public DefaultInputActions InputActionMap;
 
+        public GameObject PlayerBody;
+
         private void Awake()
         {
             InputActionMap = new DefaultInputActions();
+            PlayerBody = transform.Find("Main").gameObject;
         }
         private void OnEnable()
         {

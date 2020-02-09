@@ -73,6 +73,14 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Boost"",
+                    ""type"": ""Button"",
+                    ""id"": ""452bb2e9-8e18-40d0-ba15-3e9e87ab5249"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -383,6 +391,17 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Move_Y"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7bbeed7c-1caf-4dbb-ace2-149ec010fa75"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Boost"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -453,6 +472,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
         m_Gameplay_Aim_Y = m_Gameplay.FindAction("Aim_Y", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Zoom = m_Gameplay.FindAction("Zoom", throwIfNotFound: true);
+        m_Gameplay_Boost = m_Gameplay.FindAction("Boost", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -512,6 +532,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Aim_Y;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Zoom;
+    private readonly InputAction m_Gameplay_Boost;
     public struct GameplayActions
     {
         private @DefaultInputActions m_Wrapper;
@@ -523,6 +544,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
         public InputAction @Aim_Y => m_Wrapper.m_Gameplay_Aim_Y;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Zoom => m_Wrapper.m_Gameplay_Zoom;
+        public InputAction @Boost => m_Wrapper.m_Gameplay_Boost;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -553,6 +575,9 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                 @Zoom.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnZoom;
                 @Zoom.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnZoom;
                 @Zoom.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnZoom;
+                @Boost.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBoost;
+                @Boost.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBoost;
+                @Boost.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBoost;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -578,6 +603,9 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                 @Zoom.started += instance.OnZoom;
                 @Zoom.performed += instance.OnZoom;
                 @Zoom.canceled += instance.OnZoom;
+                @Boost.started += instance.OnBoost;
+                @Boost.performed += instance.OnBoost;
+                @Boost.canceled += instance.OnBoost;
             }
         }
     }
@@ -642,6 +670,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
         void OnAim_Y(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+        void OnBoost(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -52,6 +52,11 @@ namespace WaterKat.Player
             ZoomInput.started += ctx => ToggleTransition();
         }
 
+        private void Start()
+        {
+            ToggleTransition();
+        }
+
         Ticker TransitionTicker = new Ticker();
 
         void ToggleTransition()
