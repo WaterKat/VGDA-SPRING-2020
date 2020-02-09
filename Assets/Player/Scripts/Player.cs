@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WaterKat.Player
+namespace WaterKat.Player_N
 {
     public class Player : MonoBehaviour
     {
@@ -16,7 +16,7 @@ namespace WaterKat.Player
             }
             set
             {
-                health = value;
+                health = Mathf.Max(value, 0);
             }
         }
 
@@ -36,6 +36,10 @@ namespace WaterKat.Player
         private void OnDisable()
         {
             InputActionMap.Disable();
+        }
+        public void TakeDamage(int damage)
+        {
+            Health += -damage;
         }
 
         #region "Grounded"

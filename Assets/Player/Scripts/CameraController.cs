@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using WaterKat.TimeKeeping;
 
 
-namespace WaterKat.Player
+namespace WaterKat.Player_N
 {
     [RequireComponent(typeof(Player))]
     public class CameraController : MonoBehaviour
@@ -55,6 +55,8 @@ namespace WaterKat.Player
         private void Start()
         {
             ToggleTransition();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         Ticker TransitionTicker = new Ticker();
@@ -135,7 +137,7 @@ namespace WaterKat.Player
         public Vector3 LookAtPoint()
         {
             Ray CameraRay = new Ray();
-            CameraRay.origin = PlayerCamera.transform.position+(PlayerCamera.transform.forward * PlayerCamera.nearClipPlane);
+            CameraRay.origin = PlayerCamera.transform.position+(Vector3.Project(CurrentPlayer.PlayerBody.transform.position-PlayerCamera.transform.position,PlayerCamera.transform.forward));
             CameraRay.direction = PlayerCamera.transform.forward;
 
             RaycastHit raycastHit;

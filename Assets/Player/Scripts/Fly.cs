@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace WaterKat.Player
+namespace WaterKat.Player_N
 {
     [RequireComponent(typeof(Player))]
     [RequireComponent(typeof(Rigidbody))]
@@ -73,7 +73,7 @@ namespace WaterKat.Player
 
         private void Update()
         {
-            if (CurrentCameraController.CameraTransitioning)
+            if (CurrentCameraController.CameraTransitioning) //Changes State based on camera conditions
             {
                 FlyMode = 0;
             }
@@ -83,7 +83,8 @@ namespace WaterKat.Player
             }
 
             Vector3 CurrentVelocity = CurrentRigidbody.velocity;
-            Quaternion CameraRotationModifier;
+
+            Quaternion CameraRotationModifier;              //Uses right camera rotation in order to calculate movement
             if (FlyMode == 0)
             {
                 CameraRotationModifier = Camera.main.transform.rotation;
@@ -93,10 +94,10 @@ namespace WaterKat.Player
                 CameraRotationModifier = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
             }
 
-            Vector3 DesiredMovement = new Vector3(Move_X_Input.ReadValue<float>(), Move_Y_Input.ReadValue<float>(), Move_Z_Input.ReadValue<float>());
+            Vector3 DesiredMovement = new Vector3(Move_X_Input.ReadValue<float>(), Move_Y_Input.ReadValue<float>(), Move_Z_Input.ReadValue<float>()).normalized;   //reads input
             DesiredMovement = CameraRotationModifier * DesiredMovement;
 
-            Vector3 XZDesiredMovement = new Vector3(Move_X_Input.ReadValue<float>(), 0, Move_Z_Input.ReadValue<float>());
+            Vector3 XZDesiredMovement = new Vector3(Move_X_Input.ReadValue<float>(), 0, Move_Z_Input.ReadValue<float>());       //reads input -Y axis;
             if (XZDesiredMovement.magnitude > 0)
             {
                 LastViableRotation = Quaternion.RotateTowards(CurrentPlayer.PlayerBody.transform.rotation, Quaternion.LookRotation(CameraRotationModifier * XZDesiredMovement,CameraRotationModifier*Vector3.up), BodyRotationSpeed);
@@ -127,7 +128,12 @@ namespace WaterKat.Player
 
             CurrentRigidbody.velocity += DragVector+MovementVector+DeadzoneBrakeVector;
 
-            Debug.Log("Velocity: " + CurrentRigidbody.velocity.magnitude);
+//            Debug.Log("Velocity: " + CurrentRigidbody.velocity.magnitude);
+
+            if ((Boosting)&&(DesiredMovement.magnitude < .75f))
+            {
+                Boosting = false;
+            }
         }
     }
 }

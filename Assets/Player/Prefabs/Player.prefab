@@ -109,13 +109,13 @@ GameObject:
   m_Component:
   - component: {fileID: 177398275}
   - component: {fileID: 177398276}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: GrayEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &177398275
 Transform:
   m_ObjectHideFlags: 0
@@ -368,6 +368,8 @@ GameObject:
   - component: {fileID: 374651325}
   - component: {fileID: 374651324}
   - component: {fileID: 374651323}
+  - component: {fileID: 6957431194764516255}
+  - component: {fileID: 4683698873341350696}
   m_Layer: 9
   m_Name: Bullet
   m_TagString: Untagged
@@ -383,7 +385,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374651321}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children: []
   m_Father: {fileID: 1842380292}
@@ -415,7 +417,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: c25ea85e0d3e4974db833fbdb192c7b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -449,6 +451,35 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &6957431194764516255
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374651321}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &4683698873341350696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374651321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf6de3500554474ba7300b11c002f39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageDealt: 5
 --- !u!1 &530850856
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +490,7 @@ GameObject:
   m_Component:
   - component: {fileID: 530850857}
   - component: {fileID: 530850858}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: General
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -492,7 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 0}
+  sharedProfile: {fileID: 11400000, guid: d1da326629af17941b03bb4b925dfa35, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
@@ -741,7 +772,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1003798814}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: PostProcessing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -930,13 +961,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1096154057}
   - component: {fileID: 1096154058}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: WarpEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1096154057
 Transform:
   m_ObjectHideFlags: 0
@@ -979,7 +1010,6 @@ GameObject:
   - component: {fileID: 1292122465}
   - component: {fileID: 1292122468}
   - component: {fileID: 1292122467}
-  - component: {fileID: 1292122466}
   m_Layer: 9
   m_Name: Barrel
   m_TagString: Untagged
@@ -1048,19 +1078,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1292122466
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1292122464}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1334340045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,7 +1377,6 @@ GameObject:
   - component: {fileID: 1842380292}
   - component: {fileID: 1842380295}
   - component: {fileID: 1842380294}
-  - component: {fileID: 1842380293}
   m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
@@ -1431,19 +1447,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1842380293
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842380291}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4695217892279886167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,10 +1539,10 @@ GameObject:
   - component: {fileID: 9078016189551526328}
   - component: {fileID: 1900173325277011685}
   - component: {fileID: 256522247587437717}
-  - component: {fileID: 8635461680178648590}
   - component: {fileID: 137149162}
-  - component: {fileID: 767885669}
+  - component: {fileID: 8635461680178648590}
   - component: {fileID: 1250150263}
+  - component: {fileID: 767885669}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1600,6 +1603,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &137149162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5213529414355606431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c034958634d043b499d533a64804e66e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  PlayerBody: {fileID: 0}
+  Grounded: 0
+  GroundDistance: 0.15
 --- !u!114 &8635461680178648590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1623,38 +1642,6 @@ MonoBehaviour:
   CameraDistance: 1
   CameraTransitioning: 1
   Reticle: {fileID: 265333272}
---- !u!114 &137149162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5213529414355606431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c034958634d043b499d533a64804e66e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  PlayerBody: {fileID: 0}
-  Grounded: 0
-  GroundDistance: 0.15
---- !u!114 &767885669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5213529414355606431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58a31a3399ad3441800278debcd6e10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Gun: {fileID: 1842380291}
-  GunTemplate: {fileID: 5414684957328966121}
-  PlayerBody: {fileID: 0}
-  PlayerCameraController: {fileID: 8635461680178648590}
 --- !u!114 &1250150263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1670,13 +1657,30 @@ MonoBehaviour:
   CurrentCameraController: {fileID: 0}
   FlyMode: 0
   MaxVelocity: 40
-  Acceleration: 240
+  Acceleration: 120
   DesiredVelocityMultiplier: 2
   Boosting: 0
   DeadzoneBrake: 0.1
   DeadzoneBrakeAccelerationMultiplier: 32
   BodyRotationSpeed: 10
   LastViableRotation: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &767885669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5213529414355606431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58a31a3399ad3441800278debcd6e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Gun: {fileID: 1842380291}
+  GunTemplate: {fileID: 5414684957328966121}
+  BulletTemplate: {fileID: 374651321}
+  BulletShootDistance: 2
+  BulletSpeed: 300
 --- !u!1 &5414684957328966121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,7 +1861,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 3329034093950307732}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 512
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 0

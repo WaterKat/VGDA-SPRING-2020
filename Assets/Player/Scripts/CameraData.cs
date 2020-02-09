@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WaterKat.Player
+namespace WaterKat.Player_N
 {
     public class CameraData : MonoBehaviour
     {
