@@ -75,11 +75,11 @@ namespace WaterKat.Player_N
             {
                 if (CameraTransitioning)
                 {
-                    CameraTransition += -0.1f;
+                    CameraTransition += -4f*Time.deltaTime;
                 }
                 else
                 {
-                    CameraTransition += 0.1f;
+                    CameraTransition += 4f*Time.deltaTime;
                 }
                 CameraTransition = Mathf.Clamp(CameraTransition, 1, 2);
 
