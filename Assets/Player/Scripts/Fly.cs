@@ -50,6 +50,13 @@ namespace WaterKat.Player_N
         public float BodyRotationSpeed = 10f;
         public Quaternion LastViableRotation = Quaternion.identity;
 
+        public float FlightTime = 10;
+        public float FlightMax = 10;
+        public float FlightRecoveryMod = 2;
+        public float FlightFallingDrag = 0;
+
+        public UI_UpdateAlphaMask FlyUI;
+
         private void Awake()
         {
             CurrentPlayer = GetComponent<Player>();
@@ -73,6 +80,8 @@ namespace WaterKat.Player_N
 
         private void Update()
         {
+            FlyUI.deltaDesiredMask = (FlightTime / FlightMax);
+
             if (CurrentCameraController.CameraTransitioning) //Changes State based on camera conditions
             {
                 FlyMode = 0;
@@ -87,7 +96,9 @@ namespace WaterKat.Player_N
             Quaternion CameraRotationModifier;              //Uses right camera rotation in order to calculate movement
             if (FlyMode == 0)
             {
-                CameraRotationModifier = Camera.main.transform.rotation;
+                //CameraRotationModifier = Camera.main.transform.rotation;
+                CameraRotationModifier = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
+
             }
             else
             {
@@ -126,9 +137,31 @@ namespace WaterKat.Player_N
             Vector3 DragVector = CurrentVelocity.normalized * Time.deltaTime * (DragMultiplier * Mathf.Pow(CurrentRigidbody.velocity.magnitude, 2) / 2);
             Vector3 MovementVector =  MovementVector = DesiredMovement * Time.deltaTime * ModifiedAcceleration;
 
+
+            if (CurrentPlayer.Grounded)
+            {
+                FlightTime = Mathf.Min(FlightTime+(FlightRecoveryMod * Time.deltaTime),FlightMax);
+                MovementVector.y = 0;
+                DragVector.y = 0;
+                DeadzoneBrakeVector.y = 0;
+            }
+            else
+            {
+                if (FlightTime > 0)
+                {
+                    FlightTime += -1 * Time.deltaTime;
+                }
+                else
+                {
+                    MovementVector.y = (Physics.gravity.y * Time.deltaTime) + Mathf.Min(MovementVector.y, 0);
+                    DeadzoneBrakeVector.y = 0;
+                    DragVector.y = Mathf.Min(DragVector.y,FlightFallingDrag);
+                }
+            }
+
             CurrentRigidbody.velocity += DragVector+MovementVector+DeadzoneBrakeVector;
 
-//            Debug.Log("Velocity: " + CurrentRigidbody.velocity.magnitude);
+            //            Debug.Log("Velocity: " + CurrentRigidbody.velocity.magnitude);
 
             if ((Boosting)&&(DesiredMovement.magnitude < .75f))
             {

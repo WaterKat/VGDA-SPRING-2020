@@ -39,6 +39,8 @@ namespace WaterKat.Player_N
         float GroundJumpVelocity = 1000f;
         float AirJumpVelocity = 1000f;
 
+        public bool ApplyGravity = false;
+
         private void Awake()
         {
             CurrentPlayer = GetComponent<Player>();
@@ -143,7 +145,10 @@ namespace WaterKat.Player_N
                         JumpState = PlayerJumpState.Standing;
                         goto case PlayerJumpState.Standing;
                     }
-                    NewVelocity.y += -RisingGravity * Time.deltaTime;
+                    if (ApplyGravity)
+                    {
+                        NewVelocity.y += -RisingGravity * Time.deltaTime;
+                    }
                     break;
 
                 case PlayerJumpState.FreeFalling:
@@ -152,7 +157,10 @@ namespace WaterKat.Player_N
                         JumpState = PlayerJumpState.Standing;
                         goto case PlayerJumpState.Standing;
                     }
-                    NewVelocity.y += -FallingGravity * Time.deltaTime;
+                    if (ApplyGravity)
+                    {
+                        NewVelocity.y += -FallingGravity * Time.deltaTime;
+                    }
                     break;
             }
 
