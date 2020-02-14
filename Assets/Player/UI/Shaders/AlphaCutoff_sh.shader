@@ -5,7 +5,9 @@ Shader "UI/Default"
 	Properties
 	{
 		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
-		
+		_MaskTex("Mask Texture", 2D) = "white" {}
+		_MaskCutoff("Mask Cutoff", Float) = 0
+
 		_Color("Tint", Color) = (1,1,1,1)
 
 		_StencilComp("Stencil Comparison", Float) = 8
@@ -77,11 +79,13 @@ Shader "UI/Default"
 					UNITY_VERTEX_OUTPUT_STEREO
 				};
 
+				sampler2D _MaskTex;
 				sampler2D _MainTex;
 				fixed4 _Color;
 				fixed4 _TextureSampleAdd;
 				float4 _ClipRect;
 				float4 _MainTex_ST;
+				Float _MaskCutoff;
 
 				v2f vert(appdata_t v)
 				{
@@ -99,8 +103,9 @@ Shader "UI/Default"
 
 				fixed4 frag(v2f IN) : SV_Target
 				{
-					half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
-
+					half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd);
+					color.a = floor(_MaskCutoff+color.a)*tex2D(_MaskTex, IN.texcoord).a;
+					color = color * IN.color;
 					#ifdef UNITY_UI_CLIP_RECT
 					color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
 					#endif
