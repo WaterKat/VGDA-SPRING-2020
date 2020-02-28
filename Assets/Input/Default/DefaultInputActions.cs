@@ -89,6 +89,14 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Flight Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a2d3982-8817-44eb-a0a5-b129e850d0dc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -443,6 +451,28 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""380c43a8-1134-4cd0-a036-17408755d0f0"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard_Mouse"",
+                    ""action"": ""Flight Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84a04ba9-67dc-441f-8ab6-9e9351c3e772"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Flight Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -515,6 +545,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
         m_Gameplay_Zoom = m_Gameplay.FindAction("Zoom", throwIfNotFound: true);
         m_Gameplay_Boost = m_Gameplay.FindAction("Boost", throwIfNotFound: true);
         m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
+        m_Gameplay_FlightCancel = m_Gameplay.FindAction("Flight Cancel", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -576,6 +607,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Zoom;
     private readonly InputAction m_Gameplay_Boost;
     private readonly InputAction m_Gameplay_Shoot;
+    private readonly InputAction m_Gameplay_FlightCancel;
     public struct GameplayActions
     {
         private @DefaultInputActions m_Wrapper;
@@ -589,6 +621,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
         public InputAction @Zoom => m_Wrapper.m_Gameplay_Zoom;
         public InputAction @Boost => m_Wrapper.m_Gameplay_Boost;
         public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
+        public InputAction @FlightCancel => m_Wrapper.m_Gameplay_FlightCancel;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -625,6 +658,9 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                 @Shoot.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
+                @FlightCancel.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFlightCancel;
+                @FlightCancel.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFlightCancel;
+                @FlightCancel.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFlightCancel;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -656,6 +692,9 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @FlightCancel.started += instance.OnFlightCancel;
+                @FlightCancel.performed += instance.OnFlightCancel;
+                @FlightCancel.canceled += instance.OnFlightCancel;
             }
         }
     }
@@ -722,6 +761,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
         void OnZoom(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnFlightCancel(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

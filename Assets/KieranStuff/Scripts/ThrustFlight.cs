@@ -8,7 +8,7 @@ namespace WaterKat.Player_N
     [RequireComponent(typeof(Player))]
     [RequireComponent(typeof(Rigidbody))]
 
-    public class Fly : MonoBehaviour
+    public class ThrustFlight : MonoBehaviour
     {
         Player CurrentPlayer;
         InputAction Move_X_Input;
@@ -42,7 +42,6 @@ namespace WaterKat.Player_N
 
         public float DesiredVelocityMultiplier = 2f;
         private float BoostVelocityMultiplier = 2f;
-        public float BoostCostMultiplier = 1.5f;
         public bool Boosting = false;
 
         public float DeadzoneBrake = 0.1f;
@@ -112,7 +111,7 @@ namespace WaterKat.Player_N
             Vector3 XZDesiredMovement = new Vector3(Move_X_Input.ReadValue<float>(), 0, Move_Z_Input.ReadValue<float>());       //reads input -Y axis;
             if (XZDesiredMovement.magnitude > 0)
             {
-                LastViableRotation = Quaternion.RotateTowards(CurrentPlayer.PlayerBody.transform.rotation, Quaternion.LookRotation(CameraRotationModifier * XZDesiredMovement,CameraRotationModifier*Vector3.up), BodyRotationSpeed);
+                LastViableRotation = Quaternion.RotateTowards(CurrentPlayer.PlayerBody.transform.rotation, Quaternion.LookRotation(CameraRotationModifier * XZDesiredMovement, CameraRotationModifier * Vector3.up), BodyRotationSpeed);
             }
             CurrentPlayer.PlayerBody.transform.rotation = LastViableRotation;
 
@@ -136,12 +135,12 @@ namespace WaterKat.Player_N
 
 
             Vector3 DragVector = CurrentVelocity.normalized * Time.deltaTime * (DragMultiplier * Mathf.Pow(CurrentRigidbody.velocity.magnitude, 2) / 2);
-            Vector3 MovementVector =  MovementVector = DesiredMovement * Time.deltaTime * ModifiedAcceleration;
+            Vector3 MovementVector = MovementVector = DesiredMovement * Time.deltaTime * ModifiedAcceleration;
 
 
-            if ((CurrentPlayer.Grounded)&&(!Boosting))
+            if (CurrentPlayer.Grounded)
             {
-                FlightTime = Mathf.Min(FlightTime+(FlightRecoveryMod * Time.deltaTime),FlightMax);
+                FlightTime = Mathf.Min(FlightTime + (FlightRecoveryMod * Time.deltaTime), FlightMax);
                 MovementVector.y = 0;
                 DragVector.y = 0;
                 DeadzoneBrakeVector.y = 0;
@@ -150,21 +149,21 @@ namespace WaterKat.Player_N
             {
                 if (FlightTime > 0)
                 {
-                    FlightTime += -1 * (ModifiedAcceleration/Acceleration) * Time.deltaTime;
+                    FlightTime += -1 * Time.deltaTime;
                 }
                 else
                 {
                     MovementVector.y = (Physics.gravity.y * Time.deltaTime) + Mathf.Min(MovementVector.y, 0);
                     DeadzoneBrakeVector.y = 0;
-                    DragVector.y = Mathf.Min(DragVector.y,FlightFallingDrag);
+                    DragVector.y = Mathf.Min(DragVector.y, FlightFallingDrag);
                 }
             }
 
-            CurrentRigidbody.velocity += DragVector+MovementVector+DeadzoneBrakeVector;
+            CurrentRigidbody.velocity += DragVector + MovementVector + DeadzoneBrakeVector;
 
             //            Debug.Log("Velocity: " + CurrentRigidbody.velocity.magnitude);
 
-            if ((Boosting)&&((DesiredMovement.magnitude < .75f)||(FlightTime<=0)))
+            if ((Boosting) && (DesiredMovement.magnitude < .75f))
             {
                 Boosting = false;
             }

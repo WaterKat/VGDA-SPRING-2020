@@ -9,19 +9,7 @@ public class StationaryEnemy : MonoBehaviour
     [SerializeField]
     private GameObject cannon;
     [SerializeField]
-    private Transform _player;
-    //[SerializeField]
-    private Transform player
-    {
-        get
-        {
-            if (_player == null)
-            {
-                _player = FindPlayer();
-            }
-            return _player;
-        }
-    }
+    private Transform player;
     [SerializeField]
     private GameObject bullet;
 
@@ -36,19 +24,6 @@ public class StationaryEnemy : MonoBehaviour
     void Start()
     {
         distanceFromPlayer = Vector3.Distance(this.transform.position, player.transform.position);
-    }
-
-    Transform FindPlayer()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            return player.transform;
-        }
-        else 
-        { 
-            return null;
-        }
     }
 
     // Update is called once per frame
