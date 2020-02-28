@@ -42,6 +42,7 @@ namespace WaterKat.Player_N
 
         public float DesiredVelocityMultiplier = 2f;
         private float BoostVelocityMultiplier = 2f;
+        public float BoostCostMultiplier = 1.5f;
         public bool Boosting = false;
 
         public float DeadzoneBrake = 0.1f;
@@ -138,7 +139,7 @@ namespace WaterKat.Player_N
             Vector3 MovementVector =  MovementVector = DesiredMovement * Time.deltaTime * ModifiedAcceleration;
 
 
-            if (CurrentPlayer.Grounded)
+            if ((CurrentPlayer.Grounded)&&(!Boosting))
             {
                 FlightTime = Mathf.Min(FlightTime+(FlightRecoveryMod * Time.deltaTime),FlightMax);
                 MovementVector.y = 0;
@@ -149,7 +150,7 @@ namespace WaterKat.Player_N
             {
                 if (FlightTime > 0)
                 {
-                    FlightTime += -1 * Time.deltaTime;
+                    FlightTime += -1 * (ModifiedAcceleration/Acceleration) * Time.deltaTime;
                 }
                 else
                 {
@@ -163,7 +164,7 @@ namespace WaterKat.Player_N
 
             //            Debug.Log("Velocity: " + CurrentRigidbody.velocity.magnitude);
 
-            if ((Boosting)&&(DesiredMovement.magnitude < .75f))
+            if ((Boosting)&&((DesiredMovement.magnitude < .75f)||(FlightTime<=0)))
             {
                 Boosting = false;
             }
