@@ -69,6 +69,8 @@ public class StationaryEnemy : MonoBehaviour
     void Shoot()
     {
         GameObject tempBullet = Instantiate(bullet, bulletSpawnLoc.transform.position, cannon.transform.rotation) as GameObject;
+        tempBullet.transform.position += tempBullet.transform.forward;
+        tempBullet.SetActive(true);
         Rigidbody tempBulletRb = tempBullet.GetComponent<Rigidbody>();
         tempBulletRb.AddForce(tempBullet.transform.forward * gunForce, ForceMode.Impulse);
         StartCoroutine(ReloadCannon());
@@ -77,7 +79,7 @@ public class StationaryEnemy : MonoBehaviour
     IEnumerator ReloadCannon()
     {
         gunReady = false;
-        yield return new WaitForSeconds(attackDelay);
+        yield return new WaitForSeconds(attackDelay + Random.Range(-0.5f,0.5f));
         gunReady = true;
     }
 }
