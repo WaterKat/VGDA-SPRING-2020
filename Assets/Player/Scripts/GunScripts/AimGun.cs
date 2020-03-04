@@ -10,6 +10,7 @@ namespace WaterKat.Player_N
     {
         private Player CurrentPlayer;
         private CameraController CurrentCameraController;
+        private Camera PlayerCamera;
         private InputAction ShootInput;
 
         public GameObject Gun;
@@ -29,6 +30,7 @@ namespace WaterKat.Player_N
         private void Start()
         {
             CurrentCameraController = GetComponent<CameraController>();
+            PlayerCamera = CurrentCameraController.PlayerCamera;
         }
 
         void ShootGun()
@@ -43,7 +45,25 @@ namespace WaterKat.Player_N
         private void Update()
         {
             Gun.transform.localPosition = CurrentCameraController.CameraQuaternion * GunTemplate.transform.localPosition;
-            Gun.transform.LookAt(CurrentCameraController.LookAtPoint());
+            Gun.transform.LookAt(LookAtPoint());
+        }
+
+        public Vector3 LookAtPoint()
+        {
+            Ray CameraRay = new Ray();
+            CameraRay.origin = PlayerCamera.transform.position + (Vector3.Project(CurrentPlayer.PlayerBody.transform.position - PlayerCamera.transform.position, PlayerCamera.transform.forward));
+            CameraRay.direction = PlayerCamera.transform.forward;
+
+            RaycastHit raycastHit;
+            bool RaycastHitSomething = Physics.Raycast(CameraRay, out raycastHit, 100f, ~LayerMask.GetMask("Player"));
+            if (RaycastHitSomething)
+            {
+                return raycastHit.point;
+            }
+            else
+            {
+                return PlayerCamera.transform.position + (PlayerCamera.transform.forward * 100f);
+            }
         }
     }
 }
