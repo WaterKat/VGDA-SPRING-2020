@@ -78,7 +78,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Flight Cancel",
+                    "name": "Jetpack",
                     "type": "Button",
                     "id": "1a2d3982-8817-44eb-a0a5-b129e850d0dc",
                     "expectedControlType": "",
@@ -443,10 +443,10 @@
                     "name": "",
                     "id": "380c43a8-1134-4cd0-a036-17408755d0f0",
                     "path": "<Keyboard>/space",
-                    "interactions": "MultiTap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Keyboard_Mouse",
-                    "action": "Flight Cancel",
+                    "action": "Jetpack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -454,10 +454,10 @@
                     "name": "",
                     "id": "84a04ba9-67dc-441f-8ab6-9e9351c3e772",
                     "path": "<Gamepad>/buttonSouth",
-                    "interactions": "MultiTap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Flight Cancel",
+                    "action": "Jetpack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

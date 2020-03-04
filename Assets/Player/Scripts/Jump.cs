@@ -1,170 +1,80 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace WaterKat.Player_N
 {
+    [RequireComponent(typeof(Player))]
+    [RequireComponent(typeof(Rigidbody))]
     public class Jump : MonoBehaviour
     {
+        Player currentPlayer;
+        Rigidbody currentRigidbody;
 
-        public enum PlayerJumpState
-        {
-            Standing = 0,
-            Jumping = 1,
-            Rising = 2,
-            SlowFalling = 3,
-            FreeFalling = 4,
-        }
+        InputAction jump_Input;
 
         [SerializeField]
-        public PlayerJumpState JumpState = PlayerJumpState.Standing;
+        private float gravity;
+        public float Gravity
+        {
+            get
+            {
+                return gravity;
+            }
+        }
+        public float groundedGravity = 0.5f;
+        public bool applyGravity = true;
 
-        Rigidbody PlayerRB;
-        Player CurrentPlayer;
-
-        int AvailableJumps = 2;
-        public int MaxAvailableJumps = 2;
-
-        public float GroundJumpHeight;
-        public float AirJumpHeight;
-        public float GroundJumpTime;
-
-        public float FallingGravityRatio = -1000f;
-
-        float FreefallVelocity;
-
-        float RisingGravity = -1f;
-        float FallingGravity = -1f;
-        float GroundJumpVelocity = 1000f;
-        float AirJumpVelocity = 1000f;
-
-        public bool ApplyGravity = false;
+        public float jumpHeight = 10;
+        public float jumpTime = 0.5f;
+        private float jumpVelocity;
 
         private void Awake()
         {
-            CurrentPlayer = GetComponent<Player>();
+            currentPlayer = GetComponent<Player>();
+            currentRigidbody = GetComponent<Rigidbody>();
 
-            CurrentPlayer.InputActionMap.Gameplay.Jump.started += ctx => StartJump();
-            CurrentPlayer.InputActionMap.Gameplay.Jump.canceled += ctx => EndJump();
+            jump_Input = currentPlayer.InputActionMap.Gameplay.Jump;
+            jump_Input.started += ctx => StartJump();
         }
 
         void Start()
         {
-            CalculateDesiredJump();
-            PlayerRB = transform.GetComponentInChildren<Rigidbody>();
-
+            gravity = (2.0f * jumpHeight) / Mathf.Pow(jumpTime, 2);
+            jumpVelocity = gravity * jumpTime;
         }
 
-        void CalculateDesiredJump()
+        private Vector3 currentPlayerVelocity = Vector3.zero;
+
+        private void Update()
         {
-            RisingGravity = (2f * GroundJumpHeight) / Mathf.Pow(GroundJumpTime, 2);
-            FallingGravity = RisingGravity * FallingGravityRatio;
-
-            GroundJumpVelocity = GroundJumpTime * RisingGravity;
-            AirJumpVelocity = RisingGravity * Mathf.Sqrt(2 * AirJumpHeight / RisingGravity);
-
-            FreefallVelocity = -GroundJumpVelocity;
-            /*
-            Debug.Log("JumpVelocity" + GroundJumpVelocity);
-            Debug.Log("AirJumpVelocity" + AirJumpVelocity);
-            */
-        }
-
-        void StartJump()
-        {
-            Vector3 NewVelocity = PlayerRB.velocity;
-            if (AvailableJumps > 0)
+            if (applyGravity)
             {
-                AvailableJumps -= 1;
-                JumpState = PlayerJumpState.Jumping;
-
-                if (CurrentPlayer.Grounded)
+                /*
+                currentPlayerVelocity = currentRigidbody.velocity;
+                currentPlayerVelocity.y +=  -1f * gravity * Time.deltaTime;
+                currentRigidbody.velocity = currentPlayerVelocity;
+                */
+                if (currentPlayer.Grounded)
                 {
-                    NewVelocity.y = GroundJumpVelocity;
+                    //currentRigidbody.velocity += Vector3.down* groundedGravity * Time.deltaTime;
                 }
                 else
                 {
-                    NewVelocity.y = AirJumpVelocity;
+                    currentRigidbody.velocity += Vector3.down * gravity * Time.deltaTime;
                 }
             }
-            PlayerRB.velocity = NewVelocity;
         }
 
-        void EndJump()
+        private void StartJump()
         {
-            JumpState = PlayerJumpState.FreeFalling;
-        }
-
-        void Update()
-        {
-            Vector3 CurrentVelocity = PlayerRB.velocity;
-            Vector3 NewVelocity = CurrentVelocity;
-
-            Vector3 GroundVelocity;
-            bool Grounded = CurrentPlayer.CheckIfGrounded(out GroundVelocity);
-
-            if (Grounded)
+            if (currentPlayer.Grounded)
             {
-                AvailableJumps = MaxAvailableJumps;
+                currentPlayerVelocity = currentRigidbody.velocity;
+                currentPlayerVelocity.y = jumpVelocity;
+                currentRigidbody.velocity = currentPlayerVelocity;
             }
-
-            switch (JumpState)
-            {
-                case PlayerJumpState.Standing:
-                    if (Grounded)
-                    {
-                        NewVelocity.y += -1f * Time.deltaTime;
-                    }
-                    else
-                    {
-                        JumpState = PlayerJumpState.SlowFalling;
-                        goto case PlayerJumpState.SlowFalling;
-                    }
-                    break;
-
-                case PlayerJumpState.Jumping:
-
-                    if (CurrentVelocity.y < 0)
-                    {
-                        JumpState = PlayerJumpState.SlowFalling;
-                        goto case PlayerJumpState.SlowFalling;
-                    }
-                    goto case PlayerJumpState.SlowFalling;
-                    //break;
-
-                case PlayerJumpState.SlowFalling:
-
-                    if (CurrentVelocity.y < FreefallVelocity)
-                    {
-                        JumpState = PlayerJumpState.FreeFalling;
-                        goto case PlayerJumpState.FreeFalling;
-                    }
-                    if ((Grounded) && (CurrentVelocity.y - GroundVelocity.y) < 0)
-                    {
-                        JumpState = PlayerJumpState.Standing;
-                        goto case PlayerJumpState.Standing;
-                    }
-                    if (ApplyGravity)
-                    {
-                        NewVelocity.y += -RisingGravity * Time.deltaTime;
-                    }
-                    break;
-
-                case PlayerJumpState.FreeFalling:
-                    if ((Grounded) && (CurrentVelocity.y - GroundVelocity.y) < 0)
-                    {
-                        JumpState = PlayerJumpState.Standing;
-                        goto case PlayerJumpState.Standing;
-                    }
-                    if (ApplyGravity)
-                    {
-                        NewVelocity.y += -FallingGravity * Time.deltaTime;
-                    }
-                    break;
-            }
-
-            PlayerRB.velocity = NewVelocity;
         }
     }
 }
