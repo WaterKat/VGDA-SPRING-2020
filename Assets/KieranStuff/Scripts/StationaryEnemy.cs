@@ -23,6 +23,7 @@ public class StationaryEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player").GetComponent<Transform>();
         distanceFromPlayer = Vector3.Distance(this.transform.position, player.transform.position);
     }
 
@@ -44,8 +45,6 @@ public class StationaryEnemy : MonoBehaviour
     void Shoot()
     {
         GameObject tempBullet = Instantiate(bullet, bulletSpawnLoc.transform.position, cannon.transform.rotation) as GameObject;
-        tempBullet.transform.position += tempBullet.transform.forward;
-        tempBullet.SetActive(true);
         Rigidbody tempBulletRb = tempBullet.GetComponent<Rigidbody>();
         tempBulletRb.AddForce(tempBullet.transform.forward * gunForce, ForceMode.Impulse);
         StartCoroutine(ReloadCannon());

@@ -19,6 +19,7 @@ public class EnemyBullet : MonoBehaviour
         {
             DealDamage();
         }
+        Destroy(this.gameObject);
     }
 
     private void DealDamage()
