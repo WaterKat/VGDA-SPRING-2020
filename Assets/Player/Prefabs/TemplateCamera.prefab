@@ -87,7 +87,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699294e4d3f58cf4b82d75b8846826d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LocalCamera: {fileID: 1291686534399597549}
+  TemplateCamera: {fileID: 0}
+  CameraRotationSensitivity: {x: 1, y: 1}
+  CameraDistanceSensitivity: 1
   CameraRotationXBounds: {x: 0, y: 0}
   CameraRotationYBounds: {x: 0, y: 0}
-  CameraRotationZBounds: {x: 0, y: 0}
+  CameraDistanceBounds: {x: 0, y: 0}
