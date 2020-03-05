@@ -125,7 +125,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d12e3870-c147-4079-a446-c44bb47d569e"",
-                    ""path"": ""<Mouse>/middleButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard_Mouse"",
@@ -136,7 +136,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""41a2dea2-15f3-43bf-affb-72dc4c07bccb"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
