@@ -510,18 +510,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &623734475 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 623734475, guid: 24dde9f02cec3fd46849be91096f1f30,
-    type: 3}
-  m_PrefabInstance: {fileID: 1266613269}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 352a7a67c0f4d4c48b2f90e1bae3acf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &649996113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,51 +1557,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 13354308, guid: 24dde9f02cec3fd46849be91096f1f30, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 498395965, guid: 24dde9f02cec3fd46849be91096f1f30, type: 3}
-      propertyPath: targetTransform
-      value: 
-      objectReference: {fileID: 325476884}
-    - target: {fileID: 2007065242, guid: 24dde9f02cec3fd46849be91096f1f30, type: 3}
-      propertyPath: runningMaxVelocity
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2007065242, guid: 24dde9f02cec3fd46849be91096f1f30, type: 3}
-      propertyPath: runningAcceleration
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 2007065243, guid: 24dde9f02cec3fd46849be91096f1f30, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2007065243, guid: 24dde9f02cec3fd46849be91096f1f30, type: 3}
-      propertyPath: jetpackMaxVelocity
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2007065243, guid: 24dde9f02cec3fd46849be91096f1f30, type: 3}
-      propertyPath: jetpackAcceleration
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2007065243, guid: 24dde9f02cec3fd46849be91096f1f30, type: 3}
-      propertyPath: fuelCost
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2007065244, guid: 24dde9f02cec3fd46849be91096f1f30, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2007065244, guid: 24dde9f02cec3fd46849be91096f1f30, type: 3}
-      propertyPath: jumpTime
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1900173325277011685, guid: 24dde9f02cec3fd46849be91096f1f30,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5213529414355606431, guid: 24dde9f02cec3fd46849be91096f1f30,
         type: 3}
       propertyPath: m_Name
@@ -2266,26 +2209,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 60.000004, y: 0, z: 0}
---- !u!1 &1698089619 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1698089619, guid: 24dde9f02cec3fd46849be91096f1f30,
-    type: 3}
-  m_PrefabInstance: {fileID: 1266613269}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1698089623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1698089619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54a5732b62071f64a8724f0783f9444f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alphaMask: {fileID: 623734475}
-  jetpack: {fileID: 2007065243}
 --- !u!1 &1835813279
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,18 +2302,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2007065243 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2007065243, guid: 24dde9f02cec3fd46849be91096f1f30,
-    type: 3}
-  m_PrefabInstance: {fileID: 1266613269}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d1331c3e67f26e42b3faad49bb684c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4726233030521386318
 PrefabInstance:
   m_ObjectHideFlags: 0
