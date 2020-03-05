@@ -128,6 +128,8 @@ namespace WaterKat.Player_N
             PlayerCamera.transform.rotation = LerpedCameraRotationPreRotation * Quaternion.Euler(CameraRotation.y, CameraRotation.x, 0);    //This rotates any preset rotation by the input mouse/axis rotation
 
             Reticle.SetActive(CameraTransition == 0);   //if the camera mode is shooting mode then turn on the reticle;
+
+            HandleCameraCollisions();
         }
 
         public void CameraLerp(Camera CameraA, Camera CameraB, float input, Camera TargetCamera)    //This lerps camera component values (field of view, nearclipplane,farclipplane)
@@ -135,6 +137,15 @@ namespace WaterKat.Player_N
             TargetCamera.fieldOfView = Mathf.Lerp(CameraA.fieldOfView, CameraB.fieldOfView, input);
             TargetCamera.nearClipPlane = Mathf.Lerp(CameraA.nearClipPlane, CameraB.nearClipPlane, input);
             TargetCamera.farClipPlane = Mathf.Lerp(CameraA.farClipPlane, CameraB.farClipPlane, input);
+        }
+
+        private void HandleCameraCollisions()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(this.transform.position, (PlayerCamera.transform.position - this.transform.position).normalized, out hit, Vector3.Distance(PlayerCamera.transform.position, this.transform.position)))
+            {
+                PlayerCamera.transform.localPosition = (hit.point - transform.position) * 0.82f;
+            }
         }
 
         /*  DEBUG CODE
