@@ -39,12 +39,12 @@ public class SwarmBotEnemy : MonoBehaviour
         chasingMinDistance = reChaseDistance * reChaseRatio;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if ((this.transform.position - playerTrans.position).magnitude < followDistance)
         {
             // Shoot at player
-            if(missileReady)
+            if (missileReady)
             {
                 ShootMissile();
             }
@@ -73,7 +73,10 @@ public class SwarmBotEnemy : MonoBehaviour
         {
             if(moving)
             {
-                transform.position = Vector3.MoveTowards(transform.position, playerTrans.position + aerialOffset, curSpeed * Time.deltaTime);
+                rb.MovePosition(this.transform.position + (playerTrans.position + aerialOffset - this.transform.position).normalized * curSpeed * Time.fixedDeltaTime);
+
+                // OUTDATED MOVEMENT
+                /*transform.position = Vector3.MoveTowards(transform.position, playerTrans.position + aerialOffset, curSpeed * Time.deltaTime);*/
             }   
         }
         else
@@ -87,7 +90,13 @@ public class SwarmBotEnemy : MonoBehaviour
 
         if(!moving)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(this.transform.position.x, playerTrans.position.y, this.transform.position.z) + aerialOffset + this.transform.right, curSpeed * Time.deltaTime);
+            // RANDOM DIRECTION ATTEMPT
+            // Vector3 direction = Random.insideUnitCircle.normalized;
+
+            rb.MovePosition(new Vector3(this.transform.position.x, playerTrans.position.y, this.transform.position.z) + aerialOffset + this.transform.right * curSpeed * Time.fixedDeltaTime);
+
+            // OUTDATED MOVEMENT
+            /*transform.position = Vector3.MoveTowards(transform.position, new Vector3(this.transform.position.x, playerTrans.position.y, this.transform.position.z) + aerialOffset + this.transform.right, curSpeed * Time.deltaTime);*/
             /*this.transform.RotateAround(playerTrans.position, Vector3.up, rotationAroundPlayerSpeed * Time.deltaTime);*/
         }
     }

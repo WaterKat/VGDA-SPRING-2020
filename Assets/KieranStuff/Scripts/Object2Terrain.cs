@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEditor;
  
 public class Object2Terrain : EditorWindow {
@@ -128,4 +128,4 @@ public class Object2Terrain : EditorWindow {
 		float p = progress / maxProgress;
 		EditorUtility.DisplayProgressBar("Creating Terrain...", Mathf.RoundToInt(p * 100f)+ " %", p);
 	}
-}
+}*/

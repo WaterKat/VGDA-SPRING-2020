@@ -26,4 +26,9 @@ public class PlayerHealth : MonoBehaviour
     {
         return curHealth / (float)maxHealth;
     }
+
+    public void TakeDamage(int damage)
+    {
+        curHealth -= damage;
+    }
 }
