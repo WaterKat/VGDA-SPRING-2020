@@ -17,7 +17,6 @@ public class PlayerHealthText : MonoBehaviour
 
     public void UpdateHealthUI()
     {
-        Debug.Log("UPDATING UI");
         healthText.text = playerHealth.curHealth + " / " + playerHealth.maxHealth;
         filledHealthBarImage.fillAmount = playerHealth.getPercentHealth();
     }

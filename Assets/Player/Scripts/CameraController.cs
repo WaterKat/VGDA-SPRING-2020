@@ -37,6 +37,8 @@ namespace WaterKat.Player_N
         public Vector2 CameraRotation = Vector2.zero;   //This is the total camera rotation from Quaternion.Identity in degrees on X and Y Axis. the Z axis is ignored atm
         public float CameraDistance = 1;                //This is the currently deprecated Camera Distance feature that would allow for zooming in within the same camera mode.
 
+        private float cameraCollisionOffset = 0.85f;
+
 
         public GameObject Reticle;                      //This is the reticle game object that only appears currently in camera mode 1 (Shooting over the shoulder)
 
@@ -144,7 +146,7 @@ namespace WaterKat.Player_N
             RaycastHit hit;
             if (Physics.Raycast(this.transform.position, (PlayerCamera.transform.position - this.transform.position).normalized, out hit, Vector3.Distance(PlayerCamera.transform.position, this.transform.position)))
             {
-                PlayerCamera.transform.localPosition = (hit.point - transform.position) * 0.82f;
+                PlayerCamera.transform.localPosition = (hit.point - transform.position) * cameraCollisionOffset;
             }
         }
 

@@ -8,6 +8,10 @@ namespace WaterKat.Enemy_N
     {
         [SerializeField]
         int health = 100;
+
+        [Header("OPTIONAL")]
+        [SerializeField]
+        private GameObject deathEffects;
         public int Health
         {
             get
@@ -33,6 +37,10 @@ namespace WaterKat.Enemy_N
 
         void Death()
         {
+            if(deathEffects != null)
+            {
+                Instantiate(deathEffects, transform.position, transform.rotation);
+            }
             Destroy(this.gameObject);
             this.gameObject.SetActive(false);
         }

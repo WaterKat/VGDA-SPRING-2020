@@ -73,7 +73,6 @@ public class SwarmBotEnemy : MonoBehaviour
         {
             if(moving)
             {
-                Debug.Log("CHASING! SPEED = " + curSpeed);
                 transform.position = Vector3.MoveTowards(transform.position, playerTrans.position + aerialOffset, curSpeed * Time.deltaTime);
             }   
         }
