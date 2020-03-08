@@ -18,9 +18,12 @@ namespace WaterKat.Player_N
         Rigidbody currentRigidbody;
         CameraController currentCameraController;
 
-        public float runningMaxVelocity = 10;
-        public float runningAcceleration = 10;
+        public float runningMaxVelocity = 30;
+        public float runningAcceleration = 80;
         private float runningDragMultiplier;
+
+        public float groundedBrakeAcceleration = 80;
+        public float flyingBrakeAcceleration = 20;
 
         private void Awake()
         {
@@ -45,6 +48,9 @@ namespace WaterKat.Player_N
         private Vector3 runningAccelerationVector = Vector3.zero;
         private Vector3 runningDragAccelerationVector = Vector3.zero;
 
+        private Vector3 brakeAccelerationVector = Vector3.zero;
+
+        private float brakeAcceleration = 0;
 
         void Update()
         {
@@ -60,8 +66,27 @@ namespace WaterKat.Player_N
             runningAccelerationVector = cameraRotation * playerInput * runningAcceleration * Time.deltaTime;
             runningDragAccelerationVector = 0.5f * runningDragMultiplier * currentPlayerVelocity.normalized * Mathf.Pow(currentPlayerVelocity.magnitude, 2) * Time.deltaTime;
 
+            if (currentPlayer.Grounded)
+            {
+                brakeAcceleration = groundedBrakeAcceleration;
+            }
+            else
+            {
+                brakeAcceleration = flyingBrakeAcceleration;
+            }
+            brakeAccelerationVector = Vector3.Project(currentPlayerVelocity, (cameraRotation * playerInput).normalized) - currentPlayerVelocity;
+            brakeAccelerationVector = Vector3.ClampMagnitude(brakeAccelerationVector, brakeAcceleration * Time.deltaTime);
 
-            currentRigidbody.velocity += runningAccelerationVector + runningDragAccelerationVector;
+            /*
+            Debug.DrawLine(transform.position, transform.position + brakeAccelerationVector, Color.red, .1f);
+            Debug.DrawLine(transform.position, transform.position + (runningAccelerationVector / Time.deltaTime), Color.blue, .1f);
+            Debug.DrawLine(transform.position, transform.position + (currentPlayerVelocity), Color.white, .1f);
+
+            Debug.Log("Input: " + playerInput);
+            Debug.Log("Brake: " + brakeAccelerationVector);
+            */
+
+            currentRigidbody.velocity += runningAccelerationVector + runningDragAccelerationVector + brakeAccelerationVector;
         }
     }
 }
