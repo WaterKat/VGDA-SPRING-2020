@@ -40,6 +40,7 @@ namespace WaterKat.Player_N
             newBullet.transform.rotation = Gun.transform.rotation;
             newBullet.GetComponent<Rigidbody>().velocity = Gun.transform.forward * BulletSpeed;
             newBullet.SetActive(true);
+            WaterKat.Audio.AudioManager.PlaySound("LaserFire0");
         }
 
         private void Update()
