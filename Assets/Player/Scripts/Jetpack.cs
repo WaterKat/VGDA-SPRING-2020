@@ -33,6 +33,8 @@ namespace WaterKat.Player_N
 
         public float jetpackTurnaroundMultiplier = 5;
 
+        public CameraShake cameraShake;
+
         private void Awake()
         {
             currentPlayer = GetComponent<Player>();
@@ -66,6 +68,8 @@ namespace WaterKat.Player_N
 
             if (!jetpacking)
             {
+                cameraShake.ResetShake();
+
                 if (currentPlayer.Grounded)
                 {
                     fuel += groundedFuelRecovery * Time.deltaTime;
@@ -79,6 +83,16 @@ namespace WaterKat.Player_N
 
             if (jetpacking && CanUseFuel())
             {
+                // Camera shake
+                if(!cameraShake.boostShakeStarted)
+                {
+                    cameraShake.BoostStartShake(0.3f, 2f);
+                }
+                if(!cameraShake.boostShakeRunning)
+                {
+                    cameraShake.BoostCameraShake(0.02f);
+                }
+
                 modifiedJetpackAcceleration = jetpackAcceleration + Mathf.Abs(currentJump.Gravity);
                 if ((currentPlayerVelocity.y < 0) && CanUseFuel());
                 {
@@ -88,6 +102,7 @@ namespace WaterKat.Player_N
             }
             else
             {
+                cameraShake.ResetShake();
                 currentPlayerVelocity.y += (modifiedJetpackDragAcceleration) * Time.deltaTime;
             }
 

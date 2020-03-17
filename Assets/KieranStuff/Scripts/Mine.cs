@@ -23,6 +23,8 @@ public class Mine : MonoBehaviour
     [SerializeField]
     private Material triggeredMat;
 
+    public CameraShake cameraShake;
+
     private void Start()
     {
         playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
@@ -49,6 +51,7 @@ public class Mine : MonoBehaviour
     private void Explode()
     {
         float distanceFromPlayer = Vector3.Distance(this.transform.position, playerHealth.transform.position);
+        cameraShake.CallExplosionCoroutine(.2f, .4f, distanceFromPlayer);
 
         if(distanceFromPlayer < mineRadius)
         {

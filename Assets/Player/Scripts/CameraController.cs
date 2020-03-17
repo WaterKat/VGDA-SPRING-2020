@@ -19,6 +19,8 @@ namespace WaterKat.Player_N
 
 
         public Camera PlayerCamera;         //Reference to the camera inside the Player prefab (can be accessed with Camera.main as well but this allows for more than 1 camera)
+        public Transform cameraContainer;
+
         public Quaternion CameraQuaternion  //This returns a camera rotation without any modification to the Z axis
         {
             get
@@ -126,8 +128,8 @@ namespace WaterKat.Player_N
             Quaternion LerpedCameraRotationPreRotation = Quaternion.Lerp(CameraDataA.transform.localRotation, CameraDataB.transform.localRotation, LocalTransition);//And this gets the lerped local rotations between camera templates.
 
             //PlayerCamera.transform.localPosition = PlayerCamera.transform.localPosition * CameraDistance;     //Distance is currently disabled
-            PlayerCamera.transform.localPosition = Quaternion.Euler(CameraRotation.y,CameraRotation.x,0) * LerpedCameraPositionPreRotation; //This finally rotates the local position by our desired position from the mouse/axis
-            PlayerCamera.transform.rotation = LerpedCameraRotationPreRotation * Quaternion.Euler(CameraRotation.y, CameraRotation.x, 0);    //This rotates any preset rotation by the input mouse/axis rotation
+            cameraContainer.transform.localPosition = Quaternion.Euler(CameraRotation.y,CameraRotation.x,0) * LerpedCameraPositionPreRotation; //This finally rotates the local position by our desired position from the mouse/axis
+            cameraContainer.transform.rotation = LerpedCameraRotationPreRotation * Quaternion.Euler(CameraRotation.y, CameraRotation.x, 0);    //This rotates any preset rotation by the input mouse/axis rotation
 
             Reticle.SetActive(CameraTransition == 0);   //if the camera mode is shooting mode then turn on the reticle;
 
@@ -144,9 +146,9 @@ namespace WaterKat.Player_N
         private void HandleCameraCollisions()
         {
             RaycastHit hit;
-            if (Physics.Raycast(this.transform.position, (PlayerCamera.transform.position - this.transform.position).normalized, out hit, Vector3.Distance(PlayerCamera.transform.position, this.transform.position)))
+            if (Physics.Raycast(this.transform.position, (cameraContainer.transform.position - this.transform.position).normalized, out hit, Vector3.Distance(cameraContainer.transform.position, this.transform.position)))
             {
-                PlayerCamera.transform.localPosition = (hit.point - transform.position) * cameraCollisionOffset;
+                cameraContainer.transform.localPosition = (hit.point - transform.position) * cameraCollisionOffset;
             }
         }
 
