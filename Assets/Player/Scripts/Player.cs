@@ -6,20 +6,6 @@ namespace WaterKat.Player_N
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField]
-        int health = 100;
-        public int Health
-        {
-            get
-            {
-                return health;
-            }
-            set
-            {
-                health = Mathf.Max(value, 0);
-            }
-        }
-
         public DefaultInputActions InputActionMap;
 
         public GameObject PlayerBody;
@@ -37,11 +23,6 @@ namespace WaterKat.Player_N
         {
             InputActionMap.Disable();
         }
-        public void TakeDamage(int damage)
-        {
-            Health += -damage;
-        }
-
         #region "Grounded"
         public bool Grounded = false;
         public float GroundDistance = 0.15f;

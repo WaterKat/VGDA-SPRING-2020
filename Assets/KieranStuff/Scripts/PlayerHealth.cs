@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
         }
         set 
         {
-            _curHealth = Mathf.Max(0, value);
+            _curHealth = Mathf.Clamp(value, 0, maxHealth);
             playerHealthText.UpdateHealthUI();
         }
     }

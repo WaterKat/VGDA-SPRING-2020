@@ -29,7 +29,7 @@ namespace WaterKat.Enemy_N
         // Update is called once per frame
         void Update()
         {
-            if ((TargetPlayer == null) || (TargetPlayer.Health == 0))
+            if ((TargetPlayer == null))
             {
                 TargetPlayer = FindObjectOfType<Player>();
                 CurrentRigidbody.angularVelocity = Vector3.forward*100;
@@ -47,7 +47,6 @@ namespace WaterKat.Enemy_N
             Player playerScript = collision.collider.transform.GetComponent<Player>();
             if (playerScript != null)
             {
-                playerScript.TakeDamage(DamageDealt);
                 Destroy(this.gameObject);
                 this.gameObject.SetActive(false);
             }
