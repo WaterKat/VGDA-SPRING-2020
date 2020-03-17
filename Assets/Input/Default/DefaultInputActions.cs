@@ -97,6 +97,14 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Melee"",
+                    ""type"": ""Button"",
+                    ""id"": ""9c10e770-39dc-4fc5-9802-0b7647c3b8ae"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -473,6 +481,28 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Jetpack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f21baf4-0401-4004-8e8f-fba661d894ab"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard_Mouse"",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""282152c7-9e4b-4367-8839-84da1439c6fa"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -546,6 +576,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
         m_Gameplay_Boost = m_Gameplay.FindAction("Boost", throwIfNotFound: true);
         m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
         m_Gameplay_Jetpack = m_Gameplay.FindAction("Jetpack", throwIfNotFound: true);
+        m_Gameplay_Melee = m_Gameplay.FindAction("Melee", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -608,6 +639,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Boost;
     private readonly InputAction m_Gameplay_Shoot;
     private readonly InputAction m_Gameplay_Jetpack;
+    private readonly InputAction m_Gameplay_Melee;
     public struct GameplayActions
     {
         private @DefaultInputActions m_Wrapper;
@@ -622,6 +654,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
         public InputAction @Boost => m_Wrapper.m_Gameplay_Boost;
         public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
         public InputAction @Jetpack => m_Wrapper.m_Gameplay_Jetpack;
+        public InputAction @Melee => m_Wrapper.m_Gameplay_Melee;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -661,6 +694,9 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                 @Jetpack.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJetpack;
                 @Jetpack.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJetpack;
                 @Jetpack.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJetpack;
+                @Melee.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMelee;
+                @Melee.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMelee;
+                @Melee.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMelee;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -695,6 +731,9 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
                 @Jetpack.started += instance.OnJetpack;
                 @Jetpack.performed += instance.OnJetpack;
                 @Jetpack.canceled += instance.OnJetpack;
+                @Melee.started += instance.OnMelee;
+                @Melee.performed += instance.OnMelee;
+                @Melee.canceled += instance.OnMelee;
             }
         }
     }
@@ -762,6 +801,7 @@ public class @DefaultInputActions : IInputActionCollection, IDisposable
         void OnBoost(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnJetpack(InputAction.CallbackContext context);
+        void OnMelee(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
