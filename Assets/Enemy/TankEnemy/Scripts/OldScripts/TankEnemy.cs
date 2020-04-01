@@ -51,23 +51,35 @@ namespace WaterKat.Enemy_N
                 Shoot();
             }
 
-            GunHolderA.LookAt(TargetPlayer.transform.position);
-            Vector3 gunRotationA = GunHolderA.localRotation.eulerAngles;
-            gunRotationA.z = 0;
-            gunRotationA.x = Mathf.Min(0,gunRotationA.x);
-            GunHolderA.localRotation = Quaternion.Euler(gunRotationA);
+            Vector3 gunRotationA = Quaternion.LookRotation((TargetPlayer.transform.position-transform.position).normalized,transform.up).eulerAngles;
+           // gunRotationA.z = 0;
+            gunRotationA.x = Mathf.Max(0,gunRotationA.x);
+            GunHolderA.rotation = Quaternion.Inverse(transform.rotation) * Quaternion.Euler(gunRotationA);
 
-            GunHolderB.LookAt(TargetPlayer.transform.position);
+            /*
+            GunHolderB.LookAt(TargetPlayer.transform.position, transform.rotation * Vector3.right);
             Vector3 gunRotationB = GunHolderB.localRotation.eulerAngles;
-            gunRotationB.z = 0;
-            gunRotationB.x = Mathf.Min(0, gunRotationB.x);
+
+            //gunRotationB.x = Mathf.Max(0, gunRotationB.x);
+
             GunHolderB.localRotation = Quaternion.Euler(gunRotationB);
 
+    */
+
             Vector3 desiredRotation = Quaternion.LookRotation((TargetPlayer.transform.position - transform.position).normalized).eulerAngles;
-            transform.rotation = Quaternion.Euler(0, desiredRotation.y, 0);
+            if (Vector3.Distance(transform.position, TargetPlayer.transform.position) > 40)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, desiredRotation.y, 0), 90f * Time.deltaTime);
+            }
+            else
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, -desiredRotation.y, 0), 90f * Time.deltaTime);
+            }
+
 
             Vector3 currentV = CurrentRigidbody.velocity;
-            Vector3 DesiredVelocity = ((TargetPlayer.transform.position - transform.position).normalized) * MaxSpeed;
+            //            Vector3 DesiredVelocity = ((TargetPlayer.transform.position - transform.position).normalized) * MaxSpeed;
+            Vector3 DesiredVelocity = (transform.forward) * MaxSpeed;
             DesiredVelocity.y = currentV.y;
             CurrentRigidbody.velocity = DesiredVelocity;
         }
