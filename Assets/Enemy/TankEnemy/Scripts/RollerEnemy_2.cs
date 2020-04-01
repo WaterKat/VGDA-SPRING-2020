@@ -48,7 +48,6 @@ namespace WaterKat.Enemy_N
             Vector3 localEulerRotationAngles = transform.localEulerAngles;  //Rigidbody Constraints wasn't working for some reason
             localEulerRotationAngles.z = 0;
             localEulerRotationAngles.x = 0;
-            //transform.localEulerAngles = localEulerRotationAngles;
 
             if ((TargetPlayer == null))
             {
@@ -63,15 +62,7 @@ namespace WaterKat.Enemy_N
             lastEnemyVelocity = currentEnemyVelocity;
             currentEnemyVelocity = currentRigidbody.velocity;
 
-            // if (currentEnemy.Grounded)
-            // {
             rollingAccelerationVector = targetPlayerDirection * rollingAcceleration;
-            /*}
-             else
-             {
-                 rollingAccelerationVector = Vector3.zero;
-             }
-             */
 
             rollingDragAccelerationVector = 0.5f * rollingDragMultiplier * currentEnemyVelocity.normalized * Mathf.Pow(currentEnemyVelocity.magnitude, 2);
 
