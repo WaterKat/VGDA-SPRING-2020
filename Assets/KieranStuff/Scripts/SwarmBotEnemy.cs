@@ -103,6 +103,7 @@ public class SwarmBotEnemy : MonoBehaviour
 
     void ShootMissile()
     {
+        Debug.Log("MISSILE SHOT");
         GameObject tempMissile = Instantiate(missile, missileSpawnLoc.position, this.transform.rotation) as GameObject;
         Rigidbody tempMissileRb = tempMissile.GetComponent<Rigidbody>();
         /*tempMissileRb.AddForce(tempMissile.transform.forward * missileForce, ForceMode.Impulse);*/

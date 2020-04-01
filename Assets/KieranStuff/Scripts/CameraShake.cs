@@ -7,8 +7,8 @@ public class CameraShake : MonoBehaviour
     private float minMag = 10f;
     private float maxMag = 50f;
 
-    public bool boostShakeStarted = false;
-    public bool boostShakeRunning = false;
+    public bool startShakeFinished = true;
+    public bool boostStarted = false;
 
     public float getMinMag()
     {
@@ -40,11 +40,7 @@ public class CameraShake : MonoBehaviour
 
             elapsed += Time.deltaTime;
 
-            Debug.Log(elapsed);
-            Debug.Log("SHAKING CAM");
-
             yield return null;
-            Debug.Log("CONTUINING AFTER NULL");
         }
 
         transform.localPosition = originalPos;
@@ -52,45 +48,57 @@ public class CameraShake : MonoBehaviour
 
     public IEnumerator BoostStartShake(float duration, float magnitude)
     {
-        boostShakeStarted = true;
-        boostShakeRunning = true;
+        Debug.Log("BOOST STARTED: " + boostStarted);
+        Debug.Log("START BOOST FINISHED: " + startShakeFinished);
 
-        Vector3 originalPos = transform.localPosition;
-
-        float elapsed = 0.0f;
-
-        while (elapsed < duration)
+        if (boostStarted == false)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
+            boostStarted = true;
+            startShakeFinished = false;
 
-            transform.localPosition = new Vector3(x, y, originalPos.z);
+            Vector3 originalPos = transform.localPosition;
 
-            elapsed += Time.deltaTime;
+            float elapsed = 0.0f;
 
-            Debug.Log(elapsed);
-            Debug.Log("SHAKING CAM");
+            while (elapsed < duration)
+            {
+                float x = Random.Range(-1f, 1f) * magnitude;
+                float y = Random.Range(-1f, 1f) * magnitude;
 
-            yield return null;
-            Debug.Log("CONTUINING AFTER NULL");
+                transform.localPosition = new Vector3(x, y, originalPos.z);
+
+                elapsed += Time.deltaTime;
+
+                Debug.Log(elapsed);
+
+                yield return null;
+            }
+
+            transform.localPosition = originalPos;
+            startShakeFinished = true;
         }
-
-        transform.localPosition = originalPos;
-        boostShakeRunning = false;
+        else
+        {
+            yield return null;
+        }
     }
 
     public void BoostCameraShake(float magnitude)
     {
+        if (startShakeFinished)
+        {
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
 
             transform.localPosition = new Vector3(x, y, 0f);
+        }
     }
 
     public void ResetShake()
     {
         transform.localScale = Vector3.zero;
-        boostShakeStarted = false;
+        startShakeFinished = false;
+        boostStarted = false;
     }
 
 }

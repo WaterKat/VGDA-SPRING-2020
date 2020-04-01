@@ -31,7 +31,6 @@ namespace WaterKat.Enemy_N
         public void TakeDamage(int damage)
         {
             Health += -damage;
-            Debug.Log("Enemy:" + transform.name + " took " + damage + " damage!");
 
         }
 

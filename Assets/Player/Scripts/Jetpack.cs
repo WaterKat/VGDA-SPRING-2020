@@ -84,14 +84,8 @@ namespace WaterKat.Player_N
             if (jetpacking && CanUseFuel())
             {
                 // Camera shake
-                if(!cameraShake.boostShakeStarted)
-                {
-                    cameraShake.BoostStartShake(0.3f, 2f);
-                }
-                if(!cameraShake.boostShakeRunning)
-                {
-                    cameraShake.BoostCameraShake(0.02f);
-                }
+                StartCoroutine(cameraShake.BoostStartShake(0.1f, 0.06f));
+                cameraShake.BoostCameraShake(0.02f);
 
                 modifiedJetpackAcceleration = jetpackAcceleration + Mathf.Abs(currentJump.Gravity);
                 if ((currentPlayerVelocity.y < 0) && CanUseFuel());
