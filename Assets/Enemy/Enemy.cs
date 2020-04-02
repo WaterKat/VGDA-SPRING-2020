@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WaterKat.Audio;
 
 namespace WaterKat.Enemy_N
 {
@@ -40,6 +41,7 @@ namespace WaterKat.Enemy_N
             {
                 Instantiate(deathEffects, transform.position, transform.rotation);
             }
+            AudioManager.PlaySound("FlyingDroneExplode");
             Destroy(this.gameObject);
             this.gameObject.SetActive(false);
         }

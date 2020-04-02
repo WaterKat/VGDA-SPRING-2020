@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using WaterKat.Audio;
 
 namespace WaterKat.Player_N
 {
@@ -24,6 +25,9 @@ namespace WaterKat.Player_N
 
         public float groundedBrakeAcceleration = 80;
         public float flyingBrakeAcceleration = 20;
+
+        private bool sandStepPlaying = false;
+        private float stepDelay = 0.4f;
 
         private void Awake()
         {
@@ -54,6 +58,8 @@ namespace WaterKat.Player_N
 
         void Update()
         {
+            PlayRandomSandStep();
+
             currentPlayerVelocity = currentRigidbody.velocity;
             currentPlayerVelocity.y = 0;
 
@@ -87,6 +93,25 @@ namespace WaterKat.Player_N
             */
 
             currentRigidbody.velocity += runningAccelerationVector + runningDragAccelerationVector + brakeAccelerationVector;
+        }
+
+        private void PlayRandomSandStep()
+        {
+            if(currentPlayer.Grounded && playerInput.magnitude > 0)
+            {
+                if(!sandStepPlaying)
+                {
+                    StartCoroutine(PlaySingleSandStep());
+                }
+            }
+        }
+
+        private IEnumerator PlaySingleSandStep()
+        {
+            sandStepPlaying = true;
+            AudioManager.PlaySound("PlayerSandStep" + Random.Range(1, 4));
+            yield return new WaitForSeconds(stepDelay);
+            sandStepPlaying = false;
         }
     }
 }
