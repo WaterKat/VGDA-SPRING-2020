@@ -78,7 +78,7 @@ namespace WaterKat.Enemy_N
                 transform.right = right;
             }
 
-
+            currentRigidbody.AddForce(Vector3.down * 10);
         }
 
     }
