@@ -29,6 +29,10 @@ public class SwarmBotEnemy : MonoBehaviour
     public float attackDelay = 3f;
     private bool missileReady = true;
 
+    private Vector3 moveDir;
+    private bool changingMoveDir = false;
+    private float switchMoveDirDelay = 2f;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -48,31 +52,31 @@ public class SwarmBotEnemy : MonoBehaviour
                 ShootMissile();
             }
 
-            Vector3 playerTransXZ = new Vector3(playerTrans.position.x, 0f, playerTrans.position.z);
-            Vector3 thisTransXZ = new Vector3(this.transform.position.x, 0f, this.transform.position.z);
+            Vector3 playerTransXYZ = new Vector3(playerTrans.position.x, playerTrans.position.y, playerTrans.position.z);
+            Vector3 thisTransXYZ = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
 
             // Maintain looking at player when in range
             this.transform.LookAt(playerTrans);
 
-            FollowPlayer(playerTransXZ, thisTransXZ);
+            FollowPlayer(playerTransXYZ, thisTransXYZ);
         }
     }
 
-    private void FollowPlayer(Vector3 playerXZ, Vector3 thisXZ)
+    private void FollowPlayer(Vector3 playerXYZ, Vector3 thisXYZ)
     {
-        Vector3 aerialOffset = new Vector3(0f, 8f, 0f);
+        Vector3 aerialOffset = new Vector3(0f, 5f, 0f);
 
-        if((thisXZ - playerXZ).magnitude > reChaseDistance && !moving)
+        if((thisXYZ - playerXYZ).magnitude > reChaseDistance && !moving)
         {
             moving = true;
             curSpeed = baseSpeed;
         }
 
-        if ((thisXZ - playerXZ).magnitude > chasingMinDistance)
+        if ((thisXYZ - playerXYZ).magnitude > chasingMinDistance)
         {
             if(moving)
             {
-                rb.MovePosition(this.transform.position + (playerTrans.position + aerialOffset - this.transform.position).normalized * curSpeed * Time.fixedDeltaTime);
+                rb.MovePosition(this.transform.position + (aerialOffset + playerTrans.position - this.transform.position).normalized * Time.fixedDeltaTime * curSpeed);
 
                 // OUTDATED MOVEMENT
                 /*transform.position = Vector3.MoveTowards(transform.position, playerTrans.position + aerialOffset, curSpeed * Time.deltaTime);*/
@@ -91,8 +95,12 @@ public class SwarmBotEnemy : MonoBehaviour
         {
             // RANDOM DIRECTION ATTEMPT
             // Vector3 direction = Random.insideUnitCircle.normalized;
+            if(changingMoveDir == false)
+            {
+                StartCoroutine(SwitchMoveDirection());
+            }
 
-            rb.MovePosition(new Vector3(this.transform.position.x, playerTrans.position.y, this.transform.position.z) + aerialOffset + this.transform.right * curSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(this.transform.position + moveDir.normalized * curSpeed * Time.fixedDeltaTime);
 
             // OUTDATED MOVEMENT
             /*transform.position = Vector3.MoveTowards(transform.position, new Vector3(this.transform.position.x, playerTrans.position.y, this.transform.position.z) + aerialOffset + this.transform.right, curSpeed * Time.deltaTime);*/
@@ -114,5 +122,13 @@ public class SwarmBotEnemy : MonoBehaviour
         missileReady = false;
         yield return new WaitForSeconds(attackDelay + Random.Range(-0.5f, 0.5f));
         missileReady = true;
+    }
+
+    IEnumerator SwitchMoveDirection()
+    {
+        changingMoveDir = true;
+        moveDir = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0f);
+        yield return new WaitForSeconds(switchMoveDirDelay);
+        changingMoveDir = false;
     }
 }

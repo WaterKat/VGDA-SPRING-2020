@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 395fc468913a2a9449afd9f270c0e4b1
+  - enabled: 1
     path: Assets/Scenes/KieranPresentationScene.unity
     guid: 1ba4a89e8566e8548bf83b1a9227052f
   m_configObjects:
