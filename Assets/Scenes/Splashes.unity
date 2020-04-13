@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f023215668761c45998b28ca3ceb4d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredScene: PlayerPrototype
+  desiredScene: MainMenu
 --- !u!95 &521320565
 Animator:
   serializedVersion: 3
