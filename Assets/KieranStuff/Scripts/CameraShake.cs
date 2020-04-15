@@ -46,10 +46,15 @@ public class CameraShake : MonoBehaviour
         transform.localPosition = originalPos;
     }
 
+    public void CalledCameraShake(float[] inputs)
+    {
+        StartCoroutine(SingleShake(inputs[0], inputs[1]));
+    }
+
     public IEnumerator BoostStartShake(float duration, float magnitude)
     {
-        Debug.Log("BOOST STARTED: " + boostStarted);
-        Debug.Log("START BOOST FINISHED: " + startShakeFinished);
+       // Debug.Log("BOOST STARTED: " + boostStarted);
+      //  Debug.Log("START BOOST FINISHED: " + startShakeFinished);
 
         if (boostStarted == false)
         {
@@ -69,7 +74,7 @@ public class CameraShake : MonoBehaviour
 
                 elapsed += Time.deltaTime;
 
-                Debug.Log(elapsed);
+                //Debug.Log(elapsed);
 
                 yield return null;
             }

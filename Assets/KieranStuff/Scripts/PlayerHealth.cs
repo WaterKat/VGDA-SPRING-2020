@@ -44,9 +44,17 @@ public class PlayerHealth : MonoBehaviour
         return curHealth / (float)maxHealth;
     }
 
+
+    public float damageCooldown = 0.5f;
+    private float lastTookDamage = 0;
     public void TakeDamage(int damage)
     {
+        if (Time.time - lastTookDamage < damageCooldown) { return; }
+        lastTookDamage = Time.time;
         curHealth -= damage;
+        gameObject.SendMessage("StartTakeDamageUI");
+        gameObject.BroadcastMessage("CalledCameraShake", new float[] { 0.1f, damage/7f });
+        WaterKat.Audio.AudioManager.PlaySound("PlayerTakeDamage");
     }
     private void LoseGame()
     {

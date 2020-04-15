@@ -24,6 +24,6 @@ public class EnemyBullet : MonoBehaviour
 
     private void DealDamage()
     {
-        playerHealth.curHealth -= bulletDamage;
+        playerHealth.TakeDamage(bulletDamage);
     }
 }
