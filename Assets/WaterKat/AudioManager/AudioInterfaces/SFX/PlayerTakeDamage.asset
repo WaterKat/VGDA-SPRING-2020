@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e8fff7f17a1f814ca5eb3369e45d15d, type: 3}
   m_Name: PlayerTakeDamage
   m_EditorClassIdentifier: 
-  audioMixerGroup: {fileID: 0}
-  audioClip: {fileID: 0}
+  audioMixerGroup: {fileID: -178217546060216357, guid: 0f0cda5fad4db924580eb8c7747a970b,
+    type: 2}
+  audioClip: {fileID: 8300000, guid: 4e24481b4e2257642af4b373e4f2a7ad, type: 3}
   Mute: 0
   Loop: 0
   Volume: 1
-  Pitch: 1
+  Pitch: 2
   Reverse: 0
-  RandomVolumeModifier: 0
-  RandomPitchModifier: 0
+  RandomVolumeModifier: 0.15
+  RandomPitchModifier: 0.1

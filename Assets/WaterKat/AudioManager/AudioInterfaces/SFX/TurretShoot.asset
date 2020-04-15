@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e8fff7f17a1f814ca5eb3369e45d15d, type: 3}
-  m_Name: TurretFire
+  m_Name: TurretShoot
   m_EditorClassIdentifier: 
-  audioMixerGroup: {fileID: 0}
-  audioClip: {fileID: 0}
+  audioMixerGroup: {fileID: -834734011414239888, guid: 0f0cda5fad4db924580eb8c7747a970b,
+    type: 2}
+  audioClip: {fileID: 8300000, guid: 3c1bcc66f83c0bc4099729bec7be281e, type: 3}
   Mute: 0
   Loop: 0
   Volume: 1
   Pitch: 1
   Reverse: 0
-  RandomVolumeModifier: 0
-  RandomPitchModifier: 0
+  RandomVolumeModifier: 0.5
+  RandomPitchModifier: 0.5
