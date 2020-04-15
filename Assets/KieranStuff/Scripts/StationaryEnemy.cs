@@ -18,7 +18,7 @@ public class StationaryEnemy : MonoBehaviour
     float attackRange = 60f;
 
     float attackDelay = 2f;
-    float gunForce = 100f;
+    float gunForce = 150f;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +34,8 @@ public class StationaryEnemy : MonoBehaviour
 
         if(distanceFromPlayer < attackRange)
         {
-            cannon.transform.LookAt(player);
+            //cannon.transform.LookAt(player);
+            cannon.transform.rotation = Quaternion.RotateTowards(cannon.transform.rotation, Quaternion.LookRotation(player.transform.position - cannon.transform.position), 5);
             if(gunReady)
             {
                 Shoot();
@@ -46,7 +47,10 @@ public class StationaryEnemy : MonoBehaviour
     {
         GameObject tempBullet = Instantiate(bullet, bulletSpawnLoc.transform.position, cannon.transform.rotation) as GameObject;
         Rigidbody tempBulletRb = tempBullet.GetComponent<Rigidbody>();
-        tempBulletRb.AddForce(tempBullet.transform.forward * gunForce, ForceMode.Impulse);
+        // tempBulletRb.AddForce(tempBullet.transform.forward * gunForce, ForceMode.Impulse);
+        tempBullet.transform.forward = (player.transform.position - cannon.transform.position).normalized;
+        tempBulletRb.AddForce((player.transform.position-cannon.transform.position).normalized * gunForce, ForceMode.Impulse);
+        WaterKat.Audio.AudioManager.PlaySound("TurretShoot");
         StartCoroutine(ReloadCannon());
     }
 
