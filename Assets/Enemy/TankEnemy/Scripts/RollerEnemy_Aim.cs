@@ -12,10 +12,13 @@ public class RollerEnemy_Aim : MonoBehaviour
     public float rotationSpeed = 45;
 
     private Transform targetPlayer;
+    private Rigidbody targetPlayerRigidbody;
 
     void Start()
     {
         targetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+        targetPlayerRigidbody = targetPlayer.GetComponent<Rigidbody>();
+
     }
 
     // Update is called once per frame
@@ -27,7 +30,8 @@ public class RollerEnemy_Aim : MonoBehaviour
 
         Quaternion newRotation = Quaternion.identity;
 
-        newRotation = Quaternion.LookRotation(targetPlayer.position - transform.position,transform.rotation*dotComparison);
+        float timeTillImpact = Vector3.Distance(targetPlayer.position, transform.position) / 200f;
+        newRotation = Quaternion.LookRotation(targetPlayer.position+(targetPlayerRigidbody.velocity*timeTillImpact) - transform.position,transform.rotation*dotComparison);
 
         Vector3 newRotationForwards = newRotation * Vector3.forward;
 

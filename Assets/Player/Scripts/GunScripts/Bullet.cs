@@ -13,6 +13,7 @@ namespace WaterKat.Player_N
         private void Start()
         {
             playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+            Destroy(gameObject, .33f);
         }
         private void OnCollisionEnter(Collision collision)
         {

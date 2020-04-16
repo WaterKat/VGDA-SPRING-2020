@@ -138,9 +138,11 @@ GameObject:
   - component: {fileID: 268764750358110080}
   - component: {fileID: 268764750358110083}
   - component: {fileID: 268764750358110095}
+  - component: {fileID: 657691546529935295}
+  - component: {fileID: 2352958423779828763}
   m_Layer: 0
   m_Name: StationaryEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,7 +240,40 @@ MonoBehaviour:
   bulletSpawnLoc: {fileID: 6798424546890308902}
   cannon: {fileID: 8754866952513204920}
   player: {fileID: 0}
+  playerRigidbody: {fileID: 0}
   bullet: {fileID: 1140548899941411364, guid: 3f73f1cdd6a8ec7448cd85d4a6078812, type: 3}
+  attackRange: 100
+--- !u!114 &657691546529935295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268764750358110082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3a9ca8daa4dc0b48ba910a2b4081d17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 30
+  deathEffects: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1,
+    type: 3}
+  effectDuration: 1.5
+  takeDamageSound: stationaryTakeDamage
+  deathSound: stationaryDeath
+--- !u!65 &2352958423779828763
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268764750358110082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 4, z: 1.5}
+  m_Center: {x: 0.000000059604645, y: 1.5, z: -0.00000008940697}
 --- !u!1 &268764750831799049
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,7 +917,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9136661181905895465}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7281278224126275187}

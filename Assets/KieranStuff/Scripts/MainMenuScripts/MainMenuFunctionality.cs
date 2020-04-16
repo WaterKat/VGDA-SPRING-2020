@@ -10,7 +10,7 @@ public class MainMenuFunctionality : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("KieranPresentationScene");
+        SceneManager.LoadScene("3rdPresentation");
     }
 
     public void ExitGame()

@@ -13,6 +13,14 @@ namespace WaterKat.Enemy_N
         [Header("OPTIONAL")]
         [SerializeField]
         private GameObject deathEffects;
+        [SerializeField]
+        private float effectDuration = 3f;
+
+        [SerializeField]
+        private string takeDamageSound = "EnemyHit";
+        [SerializeField]
+        private string deathSound = "EnemyHit";
+
         public int Health
         {
             get
@@ -32,6 +40,7 @@ namespace WaterKat.Enemy_N
         public void TakeDamage(int damage)
         {
             Health += -damage;
+            AudioManager.PlaySound(takeDamageSound);
 
         }
 
@@ -39,9 +48,9 @@ namespace WaterKat.Enemy_N
         {
             if(deathEffects != null)
             {
-                Instantiate(deathEffects, transform.position, transform.rotation);
+                Destroy(Instantiate(deathEffects, transform.position, transform.rotation),effectDuration);
             }
-            AudioManager.PlaySound("FlyingDroneExplode");
+            AudioManager.PlaySound(deathSound);
             Destroy(this.gameObject);
             this.gameObject.SetActive(false);
         }

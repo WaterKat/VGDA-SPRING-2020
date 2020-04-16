@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Splashes.unity
     guid: 92e9b6d55fee95545ba316a3ab73cb7f
+  - enabled: 1
+    path: Assets/Scenes/3rdPresentation.unity
+    guid: 841f389b272a4bb489091db64a6f10cf
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 61a23785c46162040b08659d9e8db723,
       type: 2}

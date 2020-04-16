@@ -36,6 +36,9 @@ namespace WaterKat.Enemy_N
             }
         }
 
+        [SerializeField]
+        private float targetDistance = 100;
+
         private Vector3 rollingAccelerationVector = Vector3.zero;
         private Vector3 rollingDragAccelerationVector = Vector3.zero;
 
@@ -52,6 +55,11 @@ namespace WaterKat.Enemy_N
             if ((TargetPlayer == null))
             {
                 TargetPlayer = FindObjectOfType<Player>();
+                return;
+            }
+
+            if (Vector3.Distance(transform.position, TargetPlayer.transform.position) > targetDistance)
+            {
                 return;
             }
 

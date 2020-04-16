@@ -17,6 +17,8 @@ namespace WaterKat.Pickups
             touchingPlayerHealth.curHealth += HealAmount;
 
             Debug.Log("Healing: " + HealAmount);
+            WaterKat.Audio.AudioManager.PlaySound("ItemGet");
+
 
             Destroy(this.gameObject);
         }

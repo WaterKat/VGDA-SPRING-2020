@@ -1,6 +1,6 @@
 ﻿// Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
 
-Shader "WaterKat/AlphaCutoffLine"
+Shader "WaterKat/AlphaCutoffCircle"
 {
 	Properties
 	{
@@ -103,9 +103,8 @@ Shader "WaterKat/AlphaCutoffLine"
 
 				fixed4 frag(v2f IN) : SV_Target
 				{
-					float2 testfloat = float2(0,IN.texcoord.y);
-					half4 color = (tex2D(_MainTex, testfloat) + _TextureSampleAdd);
-					color.a = floor(_MaskCutoff+color.a)*tex2D(_MaskTex, IN.texcoord).a;
+					half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd);
+					color.a = floor(_MaskCutoff + color.a) * tex2D(_MaskTex, IN.texcoord).a;
 
 
 					color = color * IN.color;

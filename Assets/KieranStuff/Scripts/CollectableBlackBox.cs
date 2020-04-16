@@ -9,6 +9,7 @@ public class CollectableBlackBox : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<BlackBoxCounter>().blackBoxCount++;
+            WaterKat.Audio.AudioManager.PlaySound("BlackBox");
             Destroy(this.gameObject);
         }
     }
