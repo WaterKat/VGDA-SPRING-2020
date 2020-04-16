@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8fff7f17a1f814ca5eb3369e45d15d, type: 3}
+  m_Name: rollerDeath
+  m_EditorClassIdentifier: 
+  audioMixerGroup: {fileID: -834734011414239888, guid: 0f0cda5fad4db924580eb8c7747a970b,
+    type: 2}
+  audioClip: {fileID: 8300000, guid: 8faceae01b480964da3fa3c8c5369e79, type: 3}
+  Mute: 0
+  Loop: 0
+  Volume: 1
+  Pitch: 1
+  Reverse: 0
+  RandomVolumeModifier: 0
+  RandomPitchModifier: 0.15
