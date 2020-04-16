@@ -8,14 +8,22 @@ public class FlyingDroneEnemy : MonoBehaviour
     [SerializeField]
     private Transform playerTrans;
 
+    [Header("Un-Aggroed Mode")]
     private Vector3 originPos;
     private Vector3 randWanderPos;
     private float wanderSpeed = 5f;
     private float wanderRadius = 10f;
     private bool aiWalking = true;
+    private bool playerAggro = false;
+    public float detectRadius = 100f;
 
-    bool playerAggro = false;
-    float aggroDistance = 50f;
+    [Header("Aggroed Mode")]
+    public float chaseSpeed = 10f;
+    public float circlingSpeed = 3f;
+    public float stopRadius = 20f;
+    private Vector2 randomVector2;
+    private Vector3 randomRotationalVector;
+    private bool gettingRotationalVector = false;
 
     [Header("Missile Stuff")]
     public GameObject missile;
@@ -33,13 +41,13 @@ public class FlyingDroneEnemy : MonoBehaviour
         randWanderPos = new Vector3(originPos.x + Random.Range(-wanderRadius, wanderRadius), originPos.y, originPos.z + Random.Range(-wanderRadius, wanderRadius));
         this.transform.LookAt(randWanderPos);
 
-        Debug.Log("ORIGIN: " + originPos);
-        Debug.Log("RANDOM: " + randWanderPos);
+        randomVector2 = Random.insideUnitCircle;
+        randomRotationalVector = new Vector3(randomVector2.x, randomVector2.y, 0f);
     }
 
     private void FixedUpdate()
     {
-        if(playerAggro == false)
+        if((rb.position - playerTrans.position).magnitude > detectRadius)
         {
             BasicAI();
         }
@@ -51,7 +59,6 @@ public class FlyingDroneEnemy : MonoBehaviour
 
     void ShootMissile()
     {
-        Debug.Log("MISSILE SHOT");
         GameObject tempMissile = Instantiate(missile, missileSpawnLoc.position, this.transform.rotation) as GameObject;
         Rigidbody tempMissileRb = tempMissile.GetComponent<Rigidbody>();
         StartCoroutine(ReloadMissile());
@@ -80,7 +87,38 @@ public class FlyingDroneEnemy : MonoBehaviour
 
     private void FollowPlayer()
     {
+        if(missileReady)
+        {
+            ShootMissile();
+        }
+        this.transform.LookAt(playerTrans.position);
 
+        if ((rb.position - playerTrans.position).magnitude > stopRadius)
+        {
+            MoveTowardPlayer();
+        }
+        else
+        {
+            if(!gettingRotationalVector)
+            {
+                StartCoroutine(GetNewRotationalVector());
+            }
+
+            rb.MovePosition(rb.position + randomRotationalVector * circlingSpeed * Time.fixedDeltaTime);
+        }
+    }
+
+    private IEnumerator GetNewRotationalVector()
+    {
+        gettingRotationalVector = true;
+        yield return new WaitForSeconds(2f);
+        randomVector2 = Random.insideUnitCircle;
+        randomRotationalVector = new Vector3(randomVector2.x, randomVector2.y, 0f);
+        gettingRotationalVector = false;
+    }
+    private void MoveTowardPlayer()
+    {
+        rb.MovePosition(this.transform.position + (playerTrans.position - rb.position).normalized * chaseSpeed * Time.fixedDeltaTime);
     }
 
     private IEnumerator ChooseNewPosAndWait()
