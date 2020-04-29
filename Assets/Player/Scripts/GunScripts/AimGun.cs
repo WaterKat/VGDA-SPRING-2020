@@ -16,6 +16,9 @@ namespace WaterKat.Player_N
         public GameObject Gun;
         public GameObject GunTemplate;
 
+        [SerializeField]
+        private Transform BulletSpawnTransform;
+
         public GameObject BulletTemplate;
         public float BulletShootDistance = 1;
         public float BulletSpeed = 10;
@@ -45,7 +48,8 @@ namespace WaterKat.Player_N
 
         private void Update()
         {
-            Gun.transform.localPosition = CurrentCameraController.CameraQuaternion * GunTemplate.transform.localPosition;
+            Gun.transform.position = BulletSpawnTransform.position;
+            //Gun.transform.localPosition = CurrentCameraController.CameraQuaternion * GunTemplate.transform.localPosition;
             Gun.transform.LookAt(LookAtPoint());
         }
 
