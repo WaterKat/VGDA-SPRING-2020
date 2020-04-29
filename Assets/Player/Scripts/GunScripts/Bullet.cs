@@ -17,7 +17,6 @@ namespace WaterKat.Player_N
         }
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("HITTING");
             Enemy enemyscript = collision.collider.transform.GetComponent<Enemy>();
             if (enemyscript != null)
             {

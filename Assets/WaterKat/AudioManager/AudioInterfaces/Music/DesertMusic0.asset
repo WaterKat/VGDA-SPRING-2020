@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixerGroup: {fileID: 4760583834700561961, guid: 0f0cda5fad4db924580eb8c7747a970b,
     type: 2}
-  audioClip: {fileID: 8300000, guid: 06c5d693010dab9489d912af5f394ec9, type: 3}
+  audioClip: {fileID: 8300000, guid: c83a48a712388f84da7474a0d8fefe7a, type: 3}
   Mute: 0
   Loop: 1
-  Volume: 1
+  Volume: 0.546
   Pitch: 1
   Reverse: 0
   RandomVolumeModifier: 0

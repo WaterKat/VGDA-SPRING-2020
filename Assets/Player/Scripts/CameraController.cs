@@ -93,6 +93,10 @@ namespace WaterKat.Player_N
 
         private void LateUpdate()
         {
+            if(Time.timeScale == 0)
+            {
+                return;
+            }
             float LocalTransition = CameraTransition;   // Kinda unnecessary, but it creates a copy of the transition (just in case we wanted to modify it)
 
             CameraRotation.x = Mathf.Repeat(CameraRotation.x + 360f, 720f) - 360f;  //This makes sure that the camera rotation stays within the bounds of -360 to 360, otherwise it would rotate 1000 degrees or more
