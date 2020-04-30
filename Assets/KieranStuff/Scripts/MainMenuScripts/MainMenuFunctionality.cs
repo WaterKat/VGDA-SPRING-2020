@@ -8,9 +8,12 @@ public class MainMenuFunctionality : MonoBehaviour
     public GameObject SettingsPanel;
     public GameObject homePanel;
 
+    public string FirstScene = "FirstVideoScene";
+
     public void StartGame()
     {
-        SceneManager.LoadScene("3rdPresentation");
+        FadeInOutScript.StartFade(FirstScene);
+       // SceneManager.LoadScene(FirstScene);
     }
 
     public void ExitGame()

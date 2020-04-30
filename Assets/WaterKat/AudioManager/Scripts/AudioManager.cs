@@ -55,7 +55,7 @@ namespace WaterKat.Audio
                     }
                 }
             }
-            DontDestroyOnLoad(transform.gameObject);
+            //DontDestroyOnLoad(transform.gameObject);
             transform.gameObject.name = className;
         }
 

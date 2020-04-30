@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 395fc468913a2a9449afd9f270c0e4b1
   - enabled: 1
+    path: Assets/Scenes/Finalized/FirstVideoScene.unity
+    guid: cbd3b57c5798d8f44aff12177f224d9e
+  - enabled: 1
+    path: Assets/Scenes/Finalized/FinalLevel.unity
+    guid: 0e54bd37c1aa598478cc4d06a888ffff
+  - enabled: 1
     path: Assets/Scenes/KieranPresentationScene.unity
     guid: 1ba4a89e8566e8548bf83b1a9227052f
   - enabled: 1
