@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5022827507861664361}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4476746363939830501}
@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 5278292983306715621}
   - component: {fileID: 4408395452027919458}
   - component: {fileID: 4661828861580696287}
+  - component: {fileID: 219916152}
   m_Layer: 0
   m_Name: BlackBox
   m_TagString: Untagged
@@ -186,8 +187,26 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &219916152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5278292983306715611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36f27e8c41aa7f04b90cc435394b655b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scanManager: {fileID: 0}
+  scannableID: 4
+  scanName: 
+  scanLore: 
+  scanTimeLength: 3
+  scannedItemImage: {fileID: 0}
 --- !u!1 &5949961859053056818
 GameObject:
   m_ObjectHideFlags: 0

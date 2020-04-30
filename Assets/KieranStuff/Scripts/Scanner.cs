@@ -15,12 +15,15 @@ public class Scanner : MonoBehaviour
     private float scanRange = 30f;
 
     public Image scanningBar;
+    public Image scannedPortrait;
     public GameObject scannedPanel;
     public TextMeshProUGUI scannedTitle;
     public TextMeshProUGUI scannedLore;
     private float scanPercentValue = 0f;
     private bool paused = false;
     private bool letGoOfScan = false;
+
+    private Scannable objectBeingScanned = null;
 
     [Header("OBJECTS TO ENABLE/DISABLE")]
     public GameObject reticleCanvas;
@@ -49,28 +52,52 @@ public class Scanner : MonoBehaviour
                 Scannable scannableObject = hit.collider.GetComponent<Scannable>();
                 if (scannableObject != null)
                 {
-                    
-                    if (!scannedIdList.Contains(scannableObject.scannableID))
+                    if (objectBeingScanned == null)
                     {
-                        scanningBar.gameObject.SetActive(true);
-                        if (!scanningList.ContainsKey(scannableObject.scannableID))
+                        objectBeingScanned = scannableObject;
+
+                        if (!scannedIdList.Contains(scannableObject.scannableID))
                         {
-                            scanningList.Add(scannableObject.scannableID, 0f);
+                            scanningBar.gameObject.SetActive(true);
+                            if (!scanningList.ContainsKey(scannableObject.scannableID))
+                            {
+                                scanningList.Add(scannableObject.scannableID, 0f);
+                            }
+                            Scan(scannableObject);
                         }
-                        Scan(scannableObject);
+                        else
+                        {
+                            EnableScannedPanel(scannableObject);
+                        }
                     }
                     else
                     {
-                        EnableScannedPanel(scannableObject);
+                        if (scannableObject == objectBeingScanned)
+                        {
+                            if (!scannedIdList.Contains(scannableObject.scannableID))
+                            {
+                                scanningBar.gameObject.SetActive(true);
+                                if (!scanningList.ContainsKey(scannableObject.scannableID))
+                                {
+                                    scanningList.Add(scannableObject.scannableID, 0f);
+                                }
+                                Scan(scannableObject);
+                            }
+                            else
+                            {
+                                EnableScannedPanel(scannableObject);
+                            }
+                        }
                     }
                 }
             }
             else
             {
-                if(scanningBar.gameObject.activeSelf == true)
+                if (scanningBar.gameObject.activeSelf == true)
                 {
                     scanningBar.gameObject.SetActive(false);
                 }
+                objectBeingScanned = null;
             }
         }
     }
@@ -92,6 +119,7 @@ public class Scanner : MonoBehaviour
 
     private void EnableScannedPanel(Scannable scannedObject)
     {
+        scannedPortrait.sprite = scannedObject.scannedItemImage;
         scannedTitle.text = scannedObject.scanName;
         scannedLore.text = scannedObject.scanLore;
         reticleCanvas.SetActive(false);
@@ -100,6 +128,7 @@ public class Scanner : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         paused = true;
+        objectBeingScanned = null;
         Time.timeScale = 0;
     }
     private void DisableScannedPanel()

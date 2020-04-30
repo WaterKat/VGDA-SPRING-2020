@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 8691760135853478438}
   - component: {fileID: 2578094118226152825}
   - component: {fileID: 3102684633829164902}
+  - component: {fileID: 1731618148}
   m_Layer: 0
   m_Name: HealthPickup
   m_TagString: Untagged
@@ -186,3 +187,21 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &1731618148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8315215628465559826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36f27e8c41aa7f04b90cc435394b655b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scanManager: {fileID: 0}
+  scannableID: 3
+  scanName: 
+  scanLore: 
+  scanTimeLength: 3
+  scannedItemImage: {fileID: 0}

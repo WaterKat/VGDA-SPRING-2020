@@ -17,13 +17,15 @@ public class Scannable : MonoBehaviour
     [HideInInspector]
     public float scanTimeLength = 3f;
     [HideInInspector]
-    public Image scannedItemImage;
+    public Sprite scannedItemImage;
 
     public enum ScannableIDS
     {
         drone = 0,
         stationaryEnemy = 1,
         wheelEnemy = 2,
+        healthPickup = 3,
+        blackBox = 4,
     }
 
     private void Start()
@@ -49,6 +51,18 @@ public class Scannable : MonoBehaviour
                 scanLore = scanManager.wheelEnemyLore;
                 scannedItemImage = scanManager.wheelEnemyImage;
                 scanTimeLength = scanManager.wheelEnemyScanTime;
+                break;
+            case ScannableIDS.healthPickup:
+                scanName = "Health Canister";
+                scanLore = scanManager.healthPickupLore;
+                scannedItemImage = scanManager.healthPickupImage;
+                scanTimeLength = scanManager.healthPickupScanTime;
+                break;
+            case ScannableIDS.blackBox:
+                scanName = "Black Box";
+                scanLore = scanManager.blackBoxLore;
+                scannedItemImage = scanManager.blackBoxImage;
+                scanTimeLength = scanManager.blackBoxScanTime;
                 break;
             default:
                 break;

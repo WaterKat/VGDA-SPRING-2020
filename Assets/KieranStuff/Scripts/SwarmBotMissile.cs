@@ -42,8 +42,11 @@ public class SwarmBotMissile : MonoBehaviour
     }
 
     private void DealDamage()
-    {
-        playerHealth.curHealth -= missileDamage;
+    {   
+        if(playerHealth != null)
+        {
+            playerHealth.curHealth -= missileDamage;
+        }
     }
 
     private void Update()

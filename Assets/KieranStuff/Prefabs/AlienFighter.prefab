@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 1087401848}
   - component: {fileID: 1087401850}
   - component: {fileID: 1087401844}
-  - component: {fileID: 2590203065796590654}
   - component: {fileID: 641039247}
+  - component: {fileID: 641039248}
   m_Layer: 0
   m_Name: AlienFighter
   m_TagString: Untagged
@@ -161,29 +161,7 @@ MonoBehaviour:
     type: 3}
   effectDuration: 3
   takeDamageSound: EnemyHit
-  deathSound: EnemyHit
---- !u!114 &2590203065796590654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1458391615630120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c26545a647cbb42bf33da083e7a258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  playerTrans: {fileID: 0}
-  detectRadius: 100
-  chaseSpeed: 10
-  circlingSpeed: 3
-  stopRadius: 20
-  missile: {fileID: 0}
-  missileSpawnLoc: {fileID: 0}
-  missileForce: 100
-  attackDelay: 3
+  deathSound: FlyingDroneExplode
 --- !u!114 &641039247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,3 +184,21 @@ MonoBehaviour:
   missileSpawnLoc: {fileID: 1898135768}
   missileForce: 100
   attackDelay: 3
+--- !u!114 &641039248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458391615630120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36f27e8c41aa7f04b90cc435394b655b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scanManager: {fileID: 0}
+  scannableID: 0
+  scanName: 
+  scanLore: 
+  scanTimeLength: 3
+  scannedItemImage: {fileID: 0}

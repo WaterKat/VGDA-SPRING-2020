@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &878592789779213935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 878592789779213921}
+  - component: {fileID: 878592789779213920}
+  m_Layer: 0
+  m_Name: ScanManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &878592789779213921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878592789779213935}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &878592789779213920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878592789779213935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06754d7a28d84ce48a28b9cb9cb599f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flyingDroneLore: This is a drone made to protect the planet.
+  flyingDroneImage: {fileID: 21300000, guid: d1d71551b6f5e7c4baa7127355104de7, type: 3}
+  flyingDroneScanTime: 1
+  stationaryEnemyLore: This is a stationary robot made to defend certain areas of
+    the world.
+  stationaryEnemyImage: {fileID: 21300000, guid: 7cdd54851d8a86c40842a70f964596fc,
+    type: 3}
+  stationaryEnemyScanTime: 1
+  wheelEnemyLore: This rolling enemy tracks down enemy foes and tramples them to
+    the ground.
+  wheelEnemyImage: {fileID: 21300000, guid: f2a15f1a1b2715741b2d59452dd7b10d, type: 3}
+  wheelEnemyScanTime: 1
+  healthPickupLore: This essence of pure life restores health back to the player.
+  healthPickupImage: {fileID: 21300000, guid: 597f1395f0e5a0f4c9c721a1067ceddb, type: 3}
+  healthPickupScanTime: 1
+  blackBoxLore: When you look closely, you realize that the black box is actually
+    black.
+  blackBoxImage: {fileID: 21300000, guid: 91b43b124e6f0834b97cebbdbd9affcb, type: 3}
+  blackBoxScanTime: 5

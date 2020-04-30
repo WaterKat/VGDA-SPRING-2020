@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 268764750358110095}
   - component: {fileID: 657691546529935295}
   - component: {fileID: 2352958423779828763}
+  - component: {fileID: 1597292251}
   m_Layer: 0
   m_Name: StationaryEnemy
   m_TagString: Enemy
@@ -243,6 +244,7 @@ MonoBehaviour:
   playerRigidbody: {fileID: 0}
   bullet: {fileID: 1140548899941411364, guid: 3f73f1cdd6a8ec7448cd85d4a6078812, type: 3}
   attackRange: 100
+  gunForce: 200
 --- !u!114 &657691546529935295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +276,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 4, z: 1.5}
   m_Center: {x: 0.000000059604645, y: 1.5, z: -0.00000008940697}
+--- !u!114 &1597292251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268764750358110082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36f27e8c41aa7f04b90cc435394b655b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scanManager: {fileID: 0}
+  scannableID: 1
+  scanName: 
+  scanLore: 
+  scanTimeLength: 3
+  scannedItemImage: {fileID: 0}
 --- !u!1 &268764750831799049
 GameObject:
   m_ObjectHideFlags: 0
