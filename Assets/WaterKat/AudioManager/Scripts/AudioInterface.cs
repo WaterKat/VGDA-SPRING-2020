@@ -74,6 +74,13 @@ namespace WaterKat.Audio
             audioSource.pitch = Pitch * (1 + Random.Range(-RandomPitchModifier / 2f, RandomPitchModifier / 2f));
             audioSource.PlayDelayed(_delay);
         }
+
+        public bool isPlaying()
+        {
+            if (audioSource == null) { return; }
+            return audioSource.isPlaying;
+        }
+
         public void Pause()
         {
             if (audioSource == null) { return; }

@@ -103,6 +103,17 @@ namespace WaterKat.Audio
                 audioClip.Play();
             }
         }
+
+        public static bool SoundPlaying(string _audioName)
+        {
+            AudioInterface audioClip = instance.GetAudioClip(_audioName);
+            if (audioClip != null)
+            {
+                return audioClip.isPlaying();
+            }
+            return false;
+        }
+
         public static void PlaySoundWithDelay(string _audioName, float _delay)
         {
             AudioInterface audioClip = instance.GetAudioClip(_audioName);
