@@ -27,7 +27,7 @@ public class StationaryEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Transform>();
+        player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         playerRigidbody = player.GetComponent<Rigidbody>();
 
         distanceFromPlayer = Vector3.Distance(this.transform.position, player.transform.position);
