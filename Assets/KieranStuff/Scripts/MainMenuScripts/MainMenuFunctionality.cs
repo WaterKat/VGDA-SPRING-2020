@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuFunctionality : MonoBehaviour
 {
-    public GameObject SettingsPanel;
     public GameObject homePanel;
 
     public string FirstScene = "FirstVideoScene";
@@ -21,16 +20,5 @@ public class MainMenuFunctionality : MonoBehaviour
         Debug.Log("QUITTING GAME");
         Application.Quit();
     }
-
-    public void OpenSettings()
-    {
-        homePanel.SetActive(false);
-        SettingsPanel.SetActive(true);
-    }
-    
-    public void CloseSettings()
-    {
-        SettingsPanel.SetActive(false);
-        homePanel.SetActive(true);
-    }
+ 
 }
