@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec90dc77e313df241b41c4febead5108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingAudioName: 
+  StartingAudioName: Whimsy
   mainAudioPath: Assets/WaterKat/AudioManager/AudioInterfaces
   AudioClips:
   - {fileID: 11400000, guid: 40a3099a6e38b3d439578523d76187cc, type: 2}
@@ -51,6 +51,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c316c69671d3ea6458687be8a6f3014a, type: 2}
   - {fileID: 11400000, guid: c081ed6b46842684284e8c01a560bfbe, type: 2}
   - {fileID: 11400000, guid: 9e23e21cc01eca0479def780492b90af, type: 2}
+  - {fileID: 11400000, guid: 00781639e2babb34ab9cad5351d03b04, type: 2}
   - {fileID: 11400000, guid: 138de0829e9b3504caf8bd6b658dffef, type: 2}
   - {fileID: 11400000, guid: e7d5c5e54b537e944b59d67e9b890825, type: 2}
   - {fileID: 11400000, guid: 670baa7bf8577424ca216d620d1da613, type: 2}
@@ -59,6 +60,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5f36d16d2cd9c8d4baf4fdc1c2d9f29e, type: 2}
   - {fileID: 11400000, guid: 150402f250e83114d879d49e58a08dab, type: 2}
   - {fileID: 11400000, guid: a1e5697b7bfcacd4ea8e5da6ad2c6b5b, type: 2}
+  - {fileID: 11400000, guid: d05ebad4540d9094c884efa8ad3a87a7, type: 2}
   - {fileID: 11400000, guid: f57b1ec5ea8b9fa4f9bbca5f7e970078, type: 2}
   - {fileID: 11400000, guid: d766784ad9833af4392788c9667b4392, type: 2}
   - {fileID: 11400000, guid: c63bf706f2260144b9c9df9b5a2fb982, type: 2}

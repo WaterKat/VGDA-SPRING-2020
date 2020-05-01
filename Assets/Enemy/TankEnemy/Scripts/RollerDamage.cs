@@ -18,7 +18,10 @@ public class RollerDamage : MonoBehaviour
             bool damageSucceeded = other.collider.transform.GetComponent<PlayerHealth>().TakeDamage(savedDamage);
             if (damageSucceeded)
             {
-                AudioManager.PlaySound("RollerImpact");
+                if (!AudioManager.SoundPlaying("RollerImpact"))
+                {
+                    AudioManager.PlaySound("RollerImpact");
+                }
                 savedDamage = 0;
             }
         }

@@ -100,7 +100,10 @@ public class PausePanel : MonoBehaviour
         jetpack.fuelCost = 0;
         jetpack.jetpackMaxVelocity *= 3;
 
+
         running.runningMaxVelocity = 150f;
+        running.runningAcceleration = running.runningMaxVelocity * 2;
+
         running.enabled = false;
         running.enabled = true;
 
