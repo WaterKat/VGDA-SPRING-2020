@@ -8,8 +8,9 @@ public class GameTimer : MonoBehaviour
 {
     public float timeGiven = 180f;
     private float curTimeLeft = 180f;
-    private float curTimeLeftDisplay;
-    private bool countingDown = true;
+    public float curTimeLeftDisplay;
+    public bool countingDown = true;
+    private bool gameRunning = true;
 
     public PlayerHealth playerHealth;
     public TextMeshProUGUI timerText;
@@ -22,7 +23,7 @@ public class GameTimer : MonoBehaviour
     }
     private void Update()
     {
-        if(countingDown)
+        if(countingDown && gameRunning)
         {
             curTimeLeft -= Time.deltaTime;
             curTimeLeftDisplay = Mathf.Round(curTimeLeft * 10f) * 0.1f;
@@ -37,5 +38,10 @@ public class GameTimer : MonoBehaviour
         {
             playerHealth.LoseGame();
         }
+    }
+
+    public void TimeStop()
+    {
+        gameRunning = false;
     }
 }

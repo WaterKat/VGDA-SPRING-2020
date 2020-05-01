@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2503465744646553706}
   - component: {fileID: 2503465744646553707}
   - component: {fileID: 2503465744646553705}
+  - component: {fileID: 344299675}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2713f19175fd72f4eb0d863d3f62660f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeGiven: 240
+  timeGiven: 300
+  curTimeLeftDisplay: 0
+  countingDown: 1
   playerHealth: {fileID: 0}
   timerText: {fileID: 0}
 --- !u!114 &2503465744646553705
@@ -69,3 +72,15 @@ MonoBehaviour:
   cheatModeToggler: {fileID: 0}
   volumeSlider: {fileID: 0}
   sensitivitySlider: {fileID: 0}
+--- !u!114 &344299675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2503465744646555540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61d09e4b2e702644b473cf5da537218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

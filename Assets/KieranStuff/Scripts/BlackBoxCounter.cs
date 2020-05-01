@@ -13,6 +13,8 @@ public class BlackBoxCounter : MonoBehaviour
     [SerializeField]
     private GameObject winGamePanel;
     private CameraController camController;
+    public GameTimer gameTimer;
+    public TextMeshProUGUI timeLeftText;
 
     private int _blackBoxCount = 0;
     private int blackBoxGoal = 4;
@@ -51,6 +53,8 @@ public class BlackBoxCounter : MonoBehaviour
         winGamePanel.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        gameTimer.TimeStop();
+        timeLeftText.text = "Won with " + gameTimer.curTimeLeftDisplay + " seconds left!";
     }
     public void PlayAgain()
     {
