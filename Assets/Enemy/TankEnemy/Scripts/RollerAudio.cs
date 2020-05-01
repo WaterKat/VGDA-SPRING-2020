@@ -31,7 +31,7 @@ public class RollerAudio : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         enemy = GetComponent<Enemy>();
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = transform.parent.GetComponent<Rigidbody>();
 
     }
 

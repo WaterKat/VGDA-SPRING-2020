@@ -11,11 +11,11 @@ public class PlayerHealthText : MonoBehaviour
 
     private void Start()
     {
-        healthText.text = playerHealth.curHealth + " / " + playerHealth.maxHealth;
+        healthText.text = (int)playerHealth.curHealth + " / " + playerHealth.maxHealth;
     }
 
     public void UpdateHealthUI()
     {
-        healthText.text = playerHealth.curHealth + " / " + playerHealth.maxHealth;
+        healthText.text = Mathf.CeilToInt(playerHealth.curHealth) + " / " + playerHealth.maxHealth;
     }
 }

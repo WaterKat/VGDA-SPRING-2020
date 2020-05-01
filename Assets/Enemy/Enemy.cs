@@ -8,7 +8,7 @@ namespace WaterKat.Enemy_N
     public class Enemy : MonoBehaviour
     {
         [SerializeField]
-        int health = 100;
+        float health = 100;
 
         [Header("OPTIONAL")]
         [SerializeField]
@@ -21,7 +21,7 @@ namespace WaterKat.Enemy_N
         [SerializeField]
         private string deathSound = "EnemyHit";
 
-        public int Health
+        public float Health
         {
             get
             {
@@ -37,7 +37,7 @@ namespace WaterKat.Enemy_N
             }
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             Health += -damage;
             AudioManager.PlaySound(takeDamageSound);

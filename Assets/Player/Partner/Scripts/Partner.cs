@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WaterKat.TimeKeeping;
+using WaterKat.Player_N;
+using WaterKat.Enemy_N;
 
 namespace WaterKat.Player_N
 {
@@ -10,123 +12,132 @@ namespace WaterKat.Player_N
     [RequireComponent(typeof(CameraController))]
     public class Partner : MonoBehaviour
     {
-        public enum PartnerMovementState
-        {
-            Follow = 0,
-            Idle = 1,
-            Wander = 2,
-        }
-        public enum PartnerRotationState
-        {
-            Follow = 0,
-            Idle = 1,
-            LookAtMovingObject = 2,
-            LookAtRandomObjects = 3,
-            ScanTarget = 4,
-        }
-
-        public PartnerMovementState partnerMovementState = PartnerMovementState.Idle;
-        public PartnerRotationState partnerRotationState = PartnerRotationState.Follow;
-
         public Player currentPlayer;
         private Rigidbody currentRigidbody;
+        public CameraController currentCameraController;
 
         public float flyingMaxVelocity = 30;
         public float flyingAcceleration = 80;
         private float flyingDragMultiplier;
 
-        public float floatingRange = 10;
+        public float shootingRange = 10;
         //  public float wanderMinTim
-        public Ticker wanderTicker = new Ticker() { MaxTick = 5 };
+        public Ticker shootTicker = new Ticker() { MaxTick = 1 };
+
+        public Vector3 targetOffset = new Vector3(3, 3, 0);
+
+        public Enemy currentTarget;
+
+        [SerializeField]
+        GameObject happyFace;
+        [SerializeField]
+        GameObject angryFace;
 
         private void Start()
         {
             currentRigidbody = GetComponent<Rigidbody>();
+            flyingDragMultiplier = (-2 * flyingAcceleration) / Mathf.Pow(flyingMaxVelocity, 2);
+
         }
 
         private Vector3 TargetMovePosition = Vector3.zero;
         private Vector3 TargetLookPosition = Vector3.zero;
+
         private void Update()
         {
-            //If Too far, change state to follow 
-            if (Vector3.Distance(currentPlayer.transform.position, transform.position) > floatingRange)
+            angryFace.SetActive(currentTarget!=null);
+            happyFace.SetActive(currentTarget==null);
+        }
+
+        private void FixedUpdate()
+        {
+            Vector3 droneVelocity = currentRigidbody.velocity;
+
+
+
+
+            TargetMovePosition = currentPlayer.transform.position + (currentCameraController.CameraQuaternion * targetOffset);
+            if (currentTarget != null)
             {
-                partnerMovementState = PartnerMovementState.Follow;
+                TargetLookPosition = currentTarget.transform.position;
+                if (shootTicker.TryTick())
+                {
+                    Shoot(currentTarget.transform.position);
+                }
             }
-
-            switch (partnerMovementState)
+            else if (Vector3.Distance(TargetMovePosition, transform.position) < 2f)
             {
-                case PartnerMovementState.Follow:
-                    TargetMovePosition = currentPlayer.transform.position;
-
-                    if (Vector3.Distance(currentPlayer.transform.position, transform.position) < floatingRange)
-                    {
-                        TargetMovePosition = transform.position;
-                        partnerMovementState = PartnerMovementState.Idle;
-                    }
-                    break;
-                case PartnerMovementState.Idle:
-                    if (wanderTicker.TryTick())
-                    {
-                        goto case PartnerMovementState.Wander;
-                    }
-                    break;
-                case PartnerMovementState.Wander:
-                    Vector3 randomVector3 = currentPlayer.transform.position+new Vector3(Random.Range(-floatingRange, floatingRange)/2, Random.Range(-floatingRange, floatingRange)/2, Random.Range(-floatingRange, floatingRange)/2);
-                    Vector3 directionalVector3 = (randomVector3 - transform.position);
-                    RaycastHit raycastHit;
-                    if(!Physics.Raycast(transform.position, directionalVector3.normalized, out raycastHit, directionalVector3.magnitude))
-                    {
-                        TargetMovePosition = transform.position + randomVector3;
-                    }
-                    else
-                    {
-                        TargetMovePosition = ((raycastHit.point - transform.position) * .75f)+transform.position;
-                    }
-                    break;
-                default:
-                    break;
+                TargetLookPosition = transform.position + (currentCameraController.cameraContainer.forward * 5);
             }
-
-            switch (partnerRotationState)
+            else
             {
-                case PartnerRotationState.Follow:
-                    TargetLookPosition = transform.position + currentRigidbody.velocity;
-                    break;
-                case PartnerRotationState.Idle:
-                    break;
-                case PartnerRotationState.LookAtMovingObject:
-                    Rigidbody[] rigidbodies = GameObject.FindObjectsOfType<Rigidbody>();
-                    Rigidbody fastestRigidbody;
-                    foreach (Rigidbody rigidbody in rigidbodies)
-                    {
-                        if (rigidbody == currentRigidbody) { continue; }
-                        if (rigidbody == currentPlayer.GetComponent<Rigidbody>()) { continue; }
-
-                        
-                    }
-                    break;
-                case PartnerRotationState.LookAtRandomObjects:
-
-
-                    break;
-                case PartnerRotationState.ScanTarget:
-                    break;
-                default:
-                    break;
+                TargetLookPosition = transform.position + currentRigidbody.velocity;
             }
+        
 
+            Vector3 targetDirection = Vector3.ClampMagnitude((TargetMovePosition - transform.position).normalized, Vector3.Distance(TargetMovePosition, transform.position));
+
+            Vector3 flyingAccelerationVector = targetDirection * flyingAcceleration * Time.fixedDeltaTime;
+
+            Vector3 DragAccelerationVector = 0.5f * flyingDragMultiplier * droneVelocity.normalized * Mathf.Pow(droneVelocity.magnitude, 2) * Time.fixedDeltaTime;
+            if (Vector3.Distance(TargetMovePosition, transform.position)<2f)
+            {
+                DragAccelerationVector *= 5f;
+            }
+            currentRigidbody.velocity += flyingAccelerationVector+DragAccelerationVector;
+
+            /*
             MoveToPosition(TargetMovePosition);
+            */
             LookToPosition(TargetLookPosition);
         }
 
         private void MoveToPosition(Vector3 targetPosition)
         {
-            currentRigidbody.velocity = Vector3.ClampMagnitude(targetPosition - transform.position, flyingMaxVelocity); 
+            currentRigidbody.velocity = Vector3.ClampMagnitude((targetPosition - transform.position).normalized*flyingMaxVelocity,Vector3.Distance(targetPosition,transform.position)/Time.fixedDeltaTime); 
         }
         private void LookToPosition(Vector3 targetPosition)
         {
-            transform.LookAt(targetPosition);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(targetPosition - transform.position), 5f);
         }
+
+        [SerializeField]
+        private Transform[] bulletSpawns;
+        [SerializeField]
+        public GameObject bullet;
+        [SerializeField]
+        public float bulletSpeed = 100f;
+
+        private void Shoot(Vector3 target)
+        {
+            GameObject newBullet = Instantiate(bullet);
+            newBullet.transform.position = bulletSpawns[Random.Range(0,1)].position;
+            newBullet.transform.forward = target-transform.position;
+            newBullet.GetComponent<Rigidbody>().velocity = (target - transform.position).normalized * bulletSpeed;
+            newBullet.SetActive(true);
+            WaterKat.Audio.AudioManager.PlaySound("AekoShoot");
+        }
+        
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (currentTarget != null) { return; }
+            Enemy maybeEnemy = other.gameObject.GetComponent<Enemy>();
+            if (maybeEnemy != null)
+            {
+                currentTarget = maybeEnemy;
+            }
+
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            Enemy maybeEnemy = other.gameObject.GetComponent<Enemy>();
+            if (maybeEnemy == currentTarget)
+            {
+                currentTarget = null;
+            }
+            shootTicker.ResetTick();
+        }
+
     }
 }
