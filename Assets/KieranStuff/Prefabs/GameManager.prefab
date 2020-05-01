@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2713f19175fd72f4eb0d863d3f62660f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeGiven: 180
+  timeGiven: 240
   playerHealth: {fileID: 0}
   timerText: {fileID: 0}
 --- !u!114 &2503465744646553705

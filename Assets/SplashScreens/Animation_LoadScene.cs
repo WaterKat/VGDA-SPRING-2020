@@ -7,6 +7,7 @@ public class Animation_LoadScene : MonoBehaviour
     public string desiredScene = "SplashScreens";
     public void LoadDesiredScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(desiredScene);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene(desiredScene);
+        FadeInOutScript.StartFade(desiredScene);
     }
 }

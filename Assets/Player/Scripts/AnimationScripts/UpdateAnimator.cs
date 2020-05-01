@@ -17,6 +17,11 @@ public class UpdateAnimator : MonoBehaviour
 
         currentCameraController = GetComponent<WaterKat.Player_N.CameraController>();
     }
+
+    float lastGrounded = 0;
+    [SerializeField]
+    float waitUntilTransition = 0.25f;
+
     void Update()
     {
         float velMagnitude = currentRigidbody.velocity.magnitude;
@@ -28,8 +33,25 @@ public class UpdateAnimator : MonoBehaviour
         animator.SetFloat("Velocity_M", velMagnitude);
         animator.SetFloat("Velocity_XZM", Mathf.Min(xzVelocityMagnitude,10)/10);
 
+        if (!currentPlayer.Grounded)
+        {
+            if (Time.time - lastGrounded > waitUntilTransition)
+            {
+                animator.SetBool("Grounded", false);
+            }
+            else
+            {
+                animator.SetBool("Grounded", true);
 
-        animator.SetBool("Grounded", currentPlayer.Grounded);
+            }
+        }
+        else
+        {
+            animator.SetBool("Grounded", true);
+
+            lastGrounded = Time.time;
+        }
+        
 
         if (currentPlayer.Grounded)
         {

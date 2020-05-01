@@ -26,7 +26,8 @@ namespace WaterKat.Audio
                     GameObject newHome = new GameObject();
                     newHome.name = typeof(AudioManager).ToString();
                     newHome.AddComponent<AudioManager>();
-                    DontDestroyOnLoad(newHome);
+                    
+                    //DontDestroyOnLoad(newHome);
                     return newHome.GetComponent<AudioManager>();
                 }
             }
@@ -55,7 +56,10 @@ namespace WaterKat.Audio
                     }
                 }
             }
-            //DontDestroyOnLoad(transform.gameObject);
+            if (_singleton.dontDestroy)
+            {
+                DontDestroyOnLoad(transform.gameObject);
+            }
             transform.gameObject.name = className;
         }
 
@@ -66,6 +70,8 @@ namespace WaterKat.Audio
         [Space(30)]
         [SerializeField]
         List<AudioInterface> AudioClips = new List<AudioInterface>();
+
+        public bool dontDestroy = false;
 
         private void Start()
         {
