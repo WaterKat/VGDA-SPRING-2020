@@ -35,6 +35,8 @@ namespace WaterKat.Player_N
         public float jetpackTurnaroundMultiplier = 5;
 
         public CameraShake cameraShake;
+        public TrailRenderer trailRendererLeftFoot;
+        public TrailRenderer trailRendererRightFoot;
 
         private void Awake()
         {
@@ -51,6 +53,9 @@ namespace WaterKat.Player_N
             currentJump = GetComponent<Jump>();
 
             jetpackDragMultiplier = (-2 * jetpackAcceleration) / Mathf.Pow(jetpackMaxVelocity, 2);
+
+            trailRendererLeftFoot = GameObject.Find("PlayerJetpackTrailLeftFoot").GetComponent<TrailRenderer>();
+            trailRendererRightFoot = GameObject.Find("PlayerJetpackTrailRightFoot").GetComponent<TrailRenderer>();
         }
 
         private Vector3 currentPlayerVelocity = Vector3.zero;
@@ -60,6 +65,7 @@ namespace WaterKat.Player_N
 
         void Update()
         {
+            
             currentPlayerVelocity = currentRigidbody.velocity;
 
             modifiedJetpackDragAcceleration = 0.5f * jetpackDragMultiplier * Mathf.Sign(currentPlayerVelocity.y) * Mathf.Pow(currentPlayerVelocity.y, 2);
@@ -69,6 +75,10 @@ namespace WaterKat.Player_N
 
             if (!jetpacking)
             {
+                //wingDisplay.SetActive(false);
+                trailRendererLeftFoot.emitting = false;
+                trailRendererRightFoot.emitting = false;
+
                 AudioManager.StopSound("JetpackSustain");
                 cameraShake.ResetShake();
 
@@ -86,7 +96,10 @@ namespace WaterKat.Player_N
 
             if (jetpacking && CanUseFuel())
             {
-                if(Input.GetKey(KeyCode.Space) && !AudioManager.SoundPlaying("JetpackSustain"))
+                trailRendererLeftFoot.emitting = true;
+                trailRendererRightFoot.emitting = true;
+
+                if (Input.GetKey(KeyCode.Space) && !AudioManager.SoundPlaying("JetpackSustain"))
                 {
                     AudioManager.PlaySound("JetpackSustain");
                 }
@@ -103,6 +116,9 @@ namespace WaterKat.Player_N
             }
             else
             {
+                trailRendererLeftFoot.emitting = false;
+                trailRendererRightFoot.emitting = false;
+
                 AudioManager.StopSound("JetpackSustain");
                 cameraShake.ResetShake();
                 currentPlayerVelocity.y += (modifiedJetpackDragAcceleration) * Time.deltaTime;
