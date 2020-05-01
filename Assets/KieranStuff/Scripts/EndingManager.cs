@@ -7,7 +7,9 @@ public class EndingManager : MonoBehaviour
 {
     public void GoToEndScene()
     {
-        SceneManager.LoadScene("Ending");
+        FadeInOutScript.StartFade("Ending");
+
+        //SceneManager.LoadScene("Ending");
     }
 
 }

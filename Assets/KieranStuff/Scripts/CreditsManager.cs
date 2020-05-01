@@ -10,7 +10,9 @@ public class CreditsManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene("Splashes");
+        //SceneManager.LoadScene("Splashes");
+        FadeInOutScript.StartFade("Splashes");
+
     }
 
     private void Update()

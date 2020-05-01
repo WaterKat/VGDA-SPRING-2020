@@ -8,7 +8,7 @@ namespace WaterKat.Player_N
     public class Bullet : MonoBehaviour
     {
         public PlayerHealth playerHealth;
-        public int DamageDealt = 5;
+        public float DamageDealt = 5;
 
         private void Start()
         {
