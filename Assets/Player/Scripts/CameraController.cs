@@ -10,6 +10,7 @@ namespace WaterKat.Player_N
     [RequireComponent(typeof(Player))]
     public class CameraController : MonoBehaviour
     {
+        public float sensitivityModifier = 1f;
         public Player CurrentPlayer;        //Reference to Player Class
 
         private InputAction Aim_XInput;     //Reference to the InputAction (Mouse_X) class from the new InputSystem
@@ -104,8 +105,8 @@ namespace WaterKat.Player_N
 
             Vector2 LerpedSensitivity = Vector2.Lerp(CameraDataA.CameraRotationSensitivity, CameraDataB.CameraRotationSensitivity, LocalTransition); //This creates a lerped mouse/stick sensitiviy value so the camera reacts differently based on the template
 
-            CameraRotation.x += Aim_XInput.ReadValue<float>() * LerpedSensitivity.x;        //This takes the lerped sensitivity and multiplies it with the input from the input manager (MouseX/Y or right stick)
-            CameraRotation.y += -Aim_YInput.ReadValue<float>() * LerpedSensitivity.y;
+            CameraRotation.x += Aim_XInput.ReadValue<float>() * LerpedSensitivity.x * sensitivityModifier;        //This takes the lerped sensitivity and multiplies it with the input from the input manager (MouseX/Y or right stick)
+            CameraRotation.y += -Aim_YInput.ReadValue<float>() * LerpedSensitivity.y * sensitivityModifier;
 
             /* Currently Disabled (Gamepad doesn't have an easy zoom feature)
             float LerpedDistanceSensitivity = Mathf.Lerp(CameraDataA.CameraDistanceSensitivity, CameraDataB.CameraDistanceSensitivity, LocalTransition);    //This gets a lerped sensitivity value for the scroll wheel

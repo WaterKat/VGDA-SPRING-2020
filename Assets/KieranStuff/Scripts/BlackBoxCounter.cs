@@ -54,6 +54,7 @@ public class BlackBoxCounter : MonoBehaviour
     }
     public void PlayAgain()
     {
+        Debug.Log("Played again!");
         Scene scene = SceneManager.GetActiveScene();
         Time.timeScale = 1;
         SceneManager.LoadScene(scene.name);

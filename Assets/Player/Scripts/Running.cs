@@ -43,6 +43,13 @@ namespace WaterKat.Player_N
             runningDragMultiplier = (-2 * runningAcceleration) / Mathf.Pow(runningMaxVelocity, 2);
         }
 
+        private void OnEnable()
+        {
+            currentRigidbody = GetComponent<Rigidbody>();
+            currentCameraController = GetComponent<CameraController>();
+            runningDragMultiplier = (-2 * runningAcceleration) / Mathf.Pow(runningMaxVelocity, 2);
+        }
+
         private Vector3 currentPlayerVelocity = Vector3.zero;
 
         private Vector3 playerInput = Vector3.zero;

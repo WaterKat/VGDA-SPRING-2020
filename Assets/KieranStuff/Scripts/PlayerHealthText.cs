@@ -8,7 +8,6 @@ public class PlayerHealthText : MonoBehaviour
 {
     public PlayerHealth playerHealth;
     public TextMeshProUGUI healthText;
-    public Image filledHealthBarImage;
 
     private void Start()
     {
@@ -18,6 +17,5 @@ public class PlayerHealthText : MonoBehaviour
     public void UpdateHealthUI()
     {
         healthText.text = playerHealth.curHealth + " / " + playerHealth.maxHealth;
-        filledHealthBarImage.fillAmount = playerHealth.getPercentHealth();
     }
 }

@@ -57,7 +57,7 @@ public class PlayerHealth : MonoBehaviour
         WaterKat.Audio.AudioManager.PlaySound("PlayerTakeDamage");
         return true;
     }
-    private void LoseGame()
+    public void LoseGame()
     {
         camController.enabled = false;
         Time.timeScale = 0;
