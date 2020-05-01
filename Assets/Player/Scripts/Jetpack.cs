@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using WaterKat.Audio;
 
 namespace WaterKat.Player_N
 {
@@ -68,6 +69,7 @@ namespace WaterKat.Player_N
 
             if (!jetpacking)
             {
+                AudioManager.StopSound("JetpackSustain");
                 cameraShake.ResetShake();
 
                 if (currentPlayer.Grounded)
@@ -81,8 +83,13 @@ namespace WaterKat.Player_N
                 fuel = Mathf.Clamp(fuel, 0, maxFuel);
             }
 
+
             if (jetpacking && CanUseFuel())
             {
+                if(Input.GetKey(KeyCode.Space) && !AudioManager.SoundPlaying("JetpackSustain"))
+                {
+                    AudioManager.PlaySound("JetpackSustain");
+                }
                 // Camera shake
                 StartCoroutine(cameraShake.BoostStartShake(0.1f, 0.06f));
                 cameraShake.BoostCameraShake(0.02f);
@@ -96,6 +103,7 @@ namespace WaterKat.Player_N
             }
             else
             {
+                AudioManager.StopSound("JetpackSustain");
                 cameraShake.ResetShake();
                 currentPlayerVelocity.y += (modifiedJetpackDragAcceleration) * Time.deltaTime;
             }

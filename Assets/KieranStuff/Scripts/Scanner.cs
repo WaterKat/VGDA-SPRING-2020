@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using WaterKat.Audio;
 
 public class Scanner : MonoBehaviour
 {
@@ -67,6 +68,7 @@ public class Scanner : MonoBehaviour
                         }
                         else
                         {
+                            AudioManager.StopSound("ScanLoop");
                             EnableScannedPanel(scannableObject);
                         }
                     }
@@ -85,14 +87,21 @@ public class Scanner : MonoBehaviour
                             }
                             else
                             {
+                                AudioManager.StopSound("ScanLoop");
                                 EnableScannedPanel(scannableObject);
                             }
+                            
+                        }
+                        else
+                        {
+                            AudioManager.StopSound("ScanLoop");
                         }
                     }
                 }
             }
             else
             {
+                AudioManager.StopSound("ScanLoop");
                 if (scanningBar.gameObject.activeSelf == true)
                 {
                     scanningBar.gameObject.SetActive(false);
@@ -104,6 +113,10 @@ public class Scanner : MonoBehaviour
 
     private void Scan(Scannable scannedObject)
     {
+        if(!AudioManager.SoundPlaying("ScanLoop"))
+        {
+            AudioManager.PlaySound("ScanLoop");
+        }
         scanningList[scannedObject.scannableID] += Time.deltaTime;
         scanPercentValue = scanningList[scannedObject.scannableID] / scannedObject.scanTimeLength;
         scanningBar.fillAmount = scanPercentValue;
