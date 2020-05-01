@@ -35,7 +35,10 @@ namespace WaterKat.Player_N
             RaycastHit hit;
             if (Physics.SphereCast(downwards, SphereRadius, out hit, downwards.direction.magnitude))
             {
-                Grounded = true;
+                if (!hit.collider.isTrigger)
+                {
+                    Grounded = true;
+                }
             }
             return Grounded;
         }
@@ -46,11 +49,14 @@ namespace WaterKat.Player_N
             RaycastHit hit;
             if (Physics.SphereCast(downwards,SphereRadius, out hit, downwards.direction.magnitude))
             {
-                Grounded = true;
-                Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
-                if (rb != null)
+                if (!hit.collider.isTrigger)
                 {
-                    _groundVelocity = rb.velocity;
+                    Grounded = true;
+                    Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        _groundVelocity = rb.velocity;
+                    }
                 }
             }
             _groundVelocity = Vector3.zero;

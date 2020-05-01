@@ -6,9 +6,9 @@ using WaterKat.Player_N;
 public class PlayerHealth : MonoBehaviour
 {
     public PlayerHealthText playerHealthText;
-    public int maxHealth = 10;
+    public float maxHealth = 10;
     [SerializeField]
-    private int _curHealth = 10;
+    private float _curHealth = 10;
     public CameraShake cameraShake;
 
 
@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private GameObject loseGamePanel;
     
-    public int curHealth
+    public float curHealth
     {
         get
         {
@@ -47,14 +47,15 @@ public class PlayerHealth : MonoBehaviour
 
     public float damageCooldown = 0.5f;
     private float lastTookDamage = 0;
-    public void TakeDamage(int damage)
+    public bool TakeDamage(float damage)
     {
-        if (Time.time - lastTookDamage < damageCooldown) { return; }
+        if (Time.time - lastTookDamage < damageCooldown) { return false; }
         lastTookDamage = Time.time;
         curHealth -= damage;
         gameObject.SendMessage("StartTakeDamageUI");
         gameObject.BroadcastMessage("CalledCameraShake", new float[] { 0.1f, damage/7f });
         WaterKat.Audio.AudioManager.PlaySound("PlayerTakeDamage");
+        return true;
     }
     private void LoseGame()
     {
