@@ -77,7 +77,7 @@ namespace WaterKat.Audio
 
         public bool isPlaying()
         {
-            if (audioSource == null) { return; }
+            if (audioSource == null) { return false; }
             return audioSource.isPlaying;
         }
 
