@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WinScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public BlackBoxCounter counter;
     void Start()
     {
         
@@ -15,9 +15,16 @@ public class WinScript : MonoBehaviour
     {
         if (Input.GetKeyDown("="))
         {
-            BlackBoxCounter counter = GameObject.FindObjectOfType<BlackBoxCounter>();
-
-            counter.blackBoxCount += 100;
+            //BlackBoxCounter counter = GameObject.FindObjectOfType<BlackBoxCounter>();
+            if (counter != null)
+            {
+                counter.blackBoxCount += 100;
+                this.enabled = false;
+            }
+            else
+            {
+                Debug.LogWarning("Fuck");
+            }
 
         }
     }

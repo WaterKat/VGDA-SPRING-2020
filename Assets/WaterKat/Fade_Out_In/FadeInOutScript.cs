@@ -25,6 +25,7 @@ public class FadeInOutScript : MonoBehaviour
     public void newSceneLoaded(Scene scene, LoadSceneMode loadscenemode)
     {
         sceneLoaded = true;
+        /*
         FadeInOutScript[] fadeInOutScripts = GameObject.FindObjectsOfType<FadeInOutScript>();
         for (int i = 0; i < fadeInOutScripts.Length; i++)
         {
@@ -33,7 +34,7 @@ public class FadeInOutScript : MonoBehaviour
                 Destroy(fadeInOutScripts[i].gameObject);
             }
         }
-
+        */
         
     }
 

@@ -54,6 +54,7 @@ public class BlackBoxCounter : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         gameTimer.TimeStop();
+        if (timeLeftText == null) { Debug.LogWarning("fuck"); }
         timeLeftText.text = "Won with " + gameTimer.curTimeLeftDisplay + " seconds left!";
     }
     public void PlayAgain()
